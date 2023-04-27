@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
+
+*{
+    box-sizing: border-box;
+    font-family: 'Noto Sans Thai', sans-serif;
+}
+
+body{
+    background-color: #F9F9F9;
+    min-height: 100vh;
+}
+
+.contrainer{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+    flex-direction: row;
+}
+
+.inner-contrainer{
+    width: 100%;
+    background-color: #ffffff;
+    margin-top: 3%;
+    padding: 2%;
+    border-radius: 50px;
+    padding-bottom: 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-image{
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+    width: 100%;
+    max-height: 280px;
+    margin-top: 2%;
+}
+
+.name-contrainer{
+    margin-left: 5%;
+    display: flex;
+    flex-direction: row;
+}
+
+.detail-contrainer{
+    margin-left: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.line{
+    height:2px;
+    width: 100%;
+    color:gray;
+    background-color:gray;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+
+.line-contrainer{
+    margin-left: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.image-head{
+    max-height: 280px;
+    width: 100%;
+    padding: 5px;
+    background-color: black;
+    border-radius: 30px;
+    object-fit: contain;
+}
+
+.name-item{
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.tag-item{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 10px;
+    margin-left: 0;
+    color: #4284C5;
+    font-weight: 200;
+}
+
+.group-tag{
+    display: flex;
+    flex-direction: row;
+    margin-top: 7px;
+    margin-left: 10px;
+    overflow: hidden;
+}
+
+.color-detail{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.change-tag{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 10px;
+    margin-left: 0;
+}
+
+.icon-item{
+    width: 10%;
+    display: flex;
+    flex-direction: row;
+}
+.icon{
+    max-width: 32px;
+    max-height: 32px;
+}
+
+.profile-tag{
+    margin-left: 5%;
+    display: flex;
+    flex-direction: row;
+}
+
+.image-profile{
+    max-width: 70px;
+    max-height: 70px;
+    min-height: 50px;
+    border-radius: 10px;
+}
+
+.name-tag{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 10px;
+    margin-left: 0;
+    align-self: center;
+
+}
+
+.give-tag{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 10px;
+    margin-left: 0;
+    align-self: center;
+    color:#999B9A;
+}
+
+.head-detail{
+    margin-left: 5%;
+}
+
+.detail-item{
+    margin-left: 5%;
+}
+.text-detail{
+    margin: 0;
+}
+.buttom-group{
+    margin-left: 5%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+}
+
+.buttom-pass{
+    width: 150px;
+    height: 55px;
+    border-radius: 30px;
+    border-color: #F9F9F9;
+    background-color: #05AB9F;
+    margin-right: 20px;
+    border: 0px;
+}

@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
-import CoverItem from './listitem/listitem';
+// import CoverItem from './listitem/listitem';
 // import Notification from './noti/notification';
-// import DetaiIitem from './detailitem/detailitem';
+import DetaiIitem from './detailitem/detailitem';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <CoverItem />
+    {/* <CoverItem /> */}
     {/* <Notification /> */}
-    {/* <DetaiIitem/> */}
+    <DetaiIitem/>
   </React.StrictMode>
 );
 

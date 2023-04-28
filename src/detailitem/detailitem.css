@@ -35,7 +35,7 @@ body{
     /* background-color: red; */
     width: 90%;
     margin-left: 5%;
-    max-height: 500px;
+    max-height: 400px;
     margin-top: 2%;
 }
 
@@ -71,7 +71,7 @@ body{
 }
 
 .image-head{
-    max-height: 280px;
+    max-height: 400px;
     width: 100%;
     padding: 5px;
     background-color: black;
@@ -182,3 +182,84 @@ body{
     margin-right: 20px;
     border: 0px;
 }
+
+
+
+.modal-report{
+    position: absolute;
+    width: 50%;
+    height: auto;
+    top: 10%;
+    left: 25%;
+    transform: 'translate(-50%, -50%)';
+    width: 400;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 24;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-head{
+    width: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.line2{
+    height:2px;
+    border-width:0;
+    color:gray;
+    width: 90%;
+    background-color:gray;
+    margin-left: 0;
+    margin-top: 0;
+}
+
+.form-in{
+    width: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+
+
+}
+
+.box-over{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    max-height: 60vh;
+    width: 90%;
+}
+
+.button-con{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.button-summit{
+    width: 150px;
+    height: 55px;
+    border-radius: 30px;
+    border-color: #F9F9F9;
+    background-color: #05AB9F;
+    border:0px;
+}
+
+
+.modal-bit{
+    position: absolute;
+    width: 50%;
+    height: auto;
+    top: 10%;
+    left: 25%;
+    transform: 'translate(-50%, -50%)';
+    width: 400;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 24;
+    display: flex;
+    flex-direction: column;
+}
+
+

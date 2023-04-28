@@ -1,0 +1,27 @@
+.rightbar{
+    flex: 1;
+    height: 50vh;
+    margin: 0 25px;
+    margin-top: 2%;
+}
+
+.rightbarWrapper{
+    padding: 20px;
+    /* background-color: white; */
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    /* text-align: center; */
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 25px;
+}
+
+.check{
+    float: left;
+    margin-top: 5px;
+}
+
+.label{
+    margin-left: 10px;
+}

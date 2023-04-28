@@ -49,6 +49,8 @@ body{
     flex-wrap: wrap;
     width: 100%;
     height: auto;
+    overflow-y: scroll;
+    height: 70vh;
 }
 .card-item{
     width: 175px;
@@ -77,6 +79,7 @@ body{
     border-radius: 30px;
     border-color: #F9F9F9;
     background-color: #05AB9F;
+    border:0px;
 }
 
 .modal-create-item{

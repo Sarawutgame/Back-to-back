@@ -81,6 +81,12 @@ function CoverItem() {
             <Item/>
             <Item/>
             <Item/>
+            <Item/>
+            <Item/>
+            <Item/>
+            <Item/>
+            <Item/>
+            <Item/>
         </div>
         <div>
             <button className='create-button' onClick={handleOpen}>

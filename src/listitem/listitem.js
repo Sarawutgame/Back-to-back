@@ -1,6 +1,7 @@
 import './listitem.css';
 
-import logo from '../logo.svg';
+import sunflower from '../Sunflower.jpg'
+// import logo from '../logo.svg';
 import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -16,11 +17,15 @@ import Fade from '@mui/material/Fade';
 function Item(){
     return(
         <div className='card-item'>
-            <img src={logo} className="item-image" alt="logo" />
+            <img src={sunflower} className="item-image" alt="logo" />
             <div className='card-text'>
                 <p style={{margin:'0', fontSize: 14}}>ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100</p>
-                <div style={{margin:'0'}}>
+                <div style={{margin:'0', display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
                     <h4 style={{margin:'0', fontSize: 22, color:'#05AB9F', fontWeight:300}}>฿22</h4>
+                    <div style={{display:'flex', }}>
+                        <h4 style={{margin:'0', fontSize: 12, color:'#05AB9F', fontWeight:300, verticalAlign:'text-bottom', marginTop:'1vh'}}>หมดวันที่ 28/04/2023</h4>
+                    </div>
+                    
                 </div>
             </div>
         </div>

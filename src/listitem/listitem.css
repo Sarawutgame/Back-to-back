@@ -67,6 +67,7 @@ body{
     border-style: solid;
     border-color:gray;
     border-width: 2px;
+    object-fit:cover;
 }
 
 .card-text{
@@ -114,6 +115,7 @@ body{
     border-radius: 30px;
     border-color: #F9F9F9;
     background-color: #05AB9F;
+    border:0px;
 }
 
 .button-con{

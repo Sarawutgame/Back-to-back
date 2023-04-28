@@ -1,5 +1,6 @@
 import logo from '../logo.svg'
 import './notification.css'
+import sunflower from '../Sunflower.jpg'
 
 function NotiItem(){
   return(

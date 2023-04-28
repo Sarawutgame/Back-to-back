@@ -57,6 +57,7 @@ body{
     flex-direction: column;
     overflow-y: scroll;
     height: 60vh;
+    margin-right: 1%;
 }
 .noti-right{
     width: 50%;
@@ -64,6 +65,7 @@ body{
     flex-direction: column;
     overflow-y: scroll;
     height: 60vh;
+    margin-left: 1%;
 }
 
 .notiitem{
@@ -83,8 +85,10 @@ body{
 }
 
 .noti-image{
-    max-width: 120px;
+    max-width: 170px;
     max-height: 120px;
+    border-radius: 20px;
+    object-fit:contain;
 }
 .line{
     height:2px;
@@ -93,3 +97,22 @@ body{
     background-color:gray;
     margin-top: 0;
 }
+
+
+::-webkit-scrollbar {
+    width: 5px;
+    margin-left: 0;
+    }
+    
+    ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(238, 238, 238); 
+    border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+    background:rgb(148, 148, 148); 
+    border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+    background:rgb(31, 31, 31); }

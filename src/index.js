@@ -4,16 +4,16 @@ import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import CoverItem from './listitem/listitem';
-// import Notification from './noti/notification';
-import DetaiIitem from './detailitem/detailitem';
+import Notification from './noti/notification';
+// import DetaiIitem from './detailitem/detailitem';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
     {/* <CoverItem /> */}
-    {/* <Notification /> */}
-    <DetaiIitem/>
+    <Notification />
+    {/* <DetaiIitem/> */}
   </React.StrictMode>
 );
 

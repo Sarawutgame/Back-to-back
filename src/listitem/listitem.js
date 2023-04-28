@@ -14,16 +14,34 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 
 
-function Item(){
+function Item(props){
+    const {id, itemname, image, itemtype, dateend, price} = props;
+    console.log(id, image);
+    console.log(itemtype == 'bit')
     return(
         <div className='card-item'>
             <img src={sunflower} className="item-image" alt="logo" />
             <div className='card-text'>
-                <p style={{margin:'0', fontSize: 14}}>ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100</p>
+                <p style={{margin:'0', fontSize: 14}}>{itemname}</p>
                 <div style={{margin:'0', display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
-                    <h4 style={{margin:'0', fontSize: 22, color:'#05AB9F', fontWeight:300}}>฿22</h4>
-                    <div style={{display:'flex', }}>
-                        <h4 style={{margin:'0', fontSize: 12, color:'#05AB9F', fontWeight:300, verticalAlign:'text-bottom', marginTop:'1vh'}}>หมดวันที่ 28/04/2023</h4>
+                        {
+                            itemtype == 'give' &&
+                            <h4 style={{margin:'0', fontSize: 22, color:'#E5529B', fontWeight:300}}>ส่งต่อ</h4>
+                        }
+                        {
+                            itemtype == 'sell' &&
+                            <h4 style={{margin:'0', fontSize: 22, color:'#05AB9F', fontWeight:300}}>฿{price}</h4>
+                        }
+                        {
+                            itemtype == 'bit' &&
+                            <h4 style={{margin:'0', fontSize: 22, color:'#DB00FF', fontWeight:300}}>฿{price}</h4>
+                        }
+                    <div style={{display:'flex'}}>
+                        {
+                            itemtype == 'bit' &&
+                            <h4 style={{margin:'0', fontSize: 12, color:'#E0352D', fontWeight:300, verticalAlign:'text-bottom', marginTop:'1vh'}}>หมดวันที่ {dateend}</h4>
+                        }
+                        
                     </div>
                     
                 </div>
@@ -51,6 +69,13 @@ function CoverItem() {
         settypeInItem(event.target.value);
     };
 
+    const mockItem = [{id:'1', itemname:'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image:'Eiei', itemtype:'sell', dateend:'-', price:'30'},
+    {id:'2', itemname:'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-500', image:'Eiei', itemtype:'bit', dateend:'28/04/2023', price:'30'},
+    {id:'3', itemname:'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image:'Eiei', itemtype:'give', dateend:'-', price:'30'},
+    {id:'4', itemname:'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image:'Eiei', itemtype:'sell', dateend:'-', price:'30'},
+    {id:'5', itemname:'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image:'Eiei', itemtype:'sell', dateend:'-', price:'30'},
+    {id:'6', itemname:'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image:'Eiei', itemtype:'sell', dateend:'-', price:'30'},]
+
   return (
     <div className="contrainer">
         <div className='div1'>
@@ -75,23 +100,10 @@ function CoverItem() {
         </div>
         <hr className='line'/>
         <div className='contraniner-item'>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
+            {mockItem.map((el_item) => {
+                return <Item {...el_item} key={el_item.id}/>
+            })}
+            
         </div>
         <div>
             <button className='create-button' onClick={handleOpen}>
@@ -119,36 +131,42 @@ function CoverItem() {
                     </div>
                     <div className='form-in'>
                         <form>
-                            <div style={{marginBottom:'2%'}}>
-                                <h3 style={{margin:'0', marginLeft:'2%'}}>ชื่อ</h3>
-                                <input type="text" placeholder="Name" style={{width:'90%', height:'40px', borderRadius:'20px',padding:'2%'}}/>
-                            </div>
-                            <div style={{marginBottom:'2%'}}>
-                                <h3 style={{margin:'0', marginLeft:'2%'}}>ประเภท</h3>
-                                <Select
-                                    labelId="input-select-small"
-                                    id="input-select-small"
-                                    value={typeInItem}
-                                    label="ทั้งหมด"
-                                    onChange={handleInChange}
-                                    style={{width:'50%', borderRadius:'20px', height:'40px', borderColor:'black'}}
-                                >
-                                    <MenuItem value={10} >ให้</MenuItem>
-                                    <MenuItem value={30}>ขาย</MenuItem>
-                                    <MenuItem value={40}>ประมูล</MenuItem>
-                                </Select>
-                            </div>
-                            <div style={{marginBottom:'2%'}}>
-                                <h3 style={{margin:'0', marginLeft:'2%'}}>ราคา</h3>
-                                <input type='number' placeholder="Price" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}}/>
-                            </div>
-                            <div style={{marginBottom:'2%'}}>
-                                <h3 style={{margin:'0', marginLeft:'2%'}}>คำอธิบาย</h3>
-                                <textarea placeholder="คำอธิบาย" rows={3} style={{width:'90%', borderRadius:'20px',padding:'2%'}}/>
-                            </div>
-                            <div style={{marginBottom:'2%'}}>
-                                <h3 style={{margin:'0', marginLeft:'2%'}}>TAG</h3>
-                                <input type='number' placeholder="Price" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}}/>
+                            <div className='box-over'>
+                                <div style={{marginBottom:'2%'}}>
+                                    <h3 style={{margin:'0', marginLeft:'2%'}}>ชื่อ</h3>
+                                    <input type="text" placeholder="Name" style={{width:'90%', height:'40px', borderRadius:'20px',padding:'2%'}}/>
+                                </div>
+                                <div style={{marginBottom:'2%'}}>
+                                    <h3 style={{margin:'0', marginLeft:'2%'}}>ประเภท</h3>
+                                    <Select
+                                        labelId="input-select-small"
+                                        id="input-select-small"
+                                        value={typeInItem}
+                                        label="ทั้งหมด"
+                                        onChange={handleInChange}
+                                        style={{width:'50%', borderRadius:'20px', height:'40px', borderColor:'black'}}
+                                    >
+                                        <MenuItem value={10} >ให้</MenuItem>
+                                        <MenuItem value={30}>ขาย</MenuItem>
+                                        <MenuItem value={40}>ประมูล</MenuItem>
+                                    </Select>
+                                </div>
+                                <div style={{marginBottom:'2%'}}>
+                                    <h3 style={{margin:'0', marginLeft:'2%'}}>ราคา</h3>
+                                    <input type='number' placeholder="Price" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}}/>
+                                </div>
+                                <div style={{marginBottom:'2%'}}>
+                                    <h3 style={{margin:'0', marginLeft:'2%'}}>คำอธิบาย</h3>
+                                    <textarea placeholder="คำอธิบาย" rows={3} style={{width:'90%', borderRadius:'20px',padding:'2%'}}/>
+                                </div>
+                                <div style={{marginBottom:'2%'}}>
+                                    <h3 style={{margin:'0', marginLeft:'2%'}}>TAG</h3>
+                                    <input type='number' placeholder="Price" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}}/>
+                                </div>
+                                <div style={{marginBottom:'2%'}}>
+                                    <h3 style={{margin:'0', marginLeft:'2%'}}>ราคา</h3>
+                                    <input type='number' placeholder="Price" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}}/>
+                                </div>
                             </div>
                         </form>
                         <div className='button-con'>

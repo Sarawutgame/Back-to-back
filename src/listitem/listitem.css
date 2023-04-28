@@ -38,8 +38,9 @@ body{
     height:2px;
     border-width:0;
     color:gray;
-    width: 100%;
+    width: 90%;
     background-color:gray;
+    margin-left: 0;
     margin-top: 0;
 }
 
@@ -87,7 +88,7 @@ body{
     position: absolute;
     width: 50%;
     height: auto;
-    top: 20%;
+    top: 10%;
     left: 25%;
     transform: 'translate(-50%, -50%)';
     width: 400;
@@ -107,6 +108,15 @@ body{
     width: 100%;
     margin-left: 5%;
     margin-right: 5%;
+
+
+}
+.box-over{
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    max-height: 60vh;
+    width: 90%;
 }
 
 .button-summit{
@@ -124,3 +134,21 @@ body{
     justify-content: center;
     margin-bottom: 30px;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+    margin-left: 0;
+    }
+    
+    ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+    background:rgb(196, 196, 196); 
+    border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+    background:rgb(54, 56, 58); }

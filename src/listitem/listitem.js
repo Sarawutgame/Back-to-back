@@ -13,6 +13,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
+import axios from 'axios';
 
 
 
@@ -67,9 +68,28 @@ function Item(props) {
 
 function CoverItem() {
     const [file, setFile] = useState();
+    const [fileimg, setfileimg] = useState();
+    const [descrip, setdescrip] = useState('Demotest');
+
+    async function UploadimageToNode(){
+        const fromData = new FormData();
+        fromData.append('avatar', fileimg);
+        console.log(file)
+
+        await fetch("http://localhost:3005/upload", {
+            method: 'POST',
+            body: fromData,
+        })
+        .then((res) => res.json())
+        .then((value) => {
+            console.log(value.fileurl);
+        })
+        .catch(err => console.log(err));
+    }
 
     function handleImg(e) {
         console.log(e.target.files);
+        setfileimg(e.target.files[0]);
         setFile(URL.createObjectURL(e.target.files[0]));
     }
     const [typeItem, settypeItem] = React.useState('');
@@ -195,7 +215,7 @@ function CoverItem() {
                                     </div>
                                 </form>
                                 <div className='button-con'>
-                                    <button className='button-summit' onClick={handleClose}>
+                                    <button className='button-summit' onClick={UploadimageToNode}>
                                         <h2 style={{ margin: 0, fontWeight: 300, color: 'white' }}>สร้างสิ่งของ</h2>
                                     </button>
                                 </div>

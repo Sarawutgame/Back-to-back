@@ -13,7 +13,7 @@ function NotiItemToOhter(){
           
         </div>
         <div className='picture'>
-          <img src={logo} className="noti-image" alt="logo" />
+          <img src='https://postimagebucket.s3.amazonaws.com/ffc5dd4d-8b4a-4dd1-977c-7e803ba4c9d5.jpg' className="noti-image" alt="logo" />
         </div>
 
     </div>

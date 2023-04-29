@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import CoverItem from './listitem/listitem';
-import Notification from './noti/notification';
+import CoverItem from './listitem/listitem';
+// import Notification from './noti/notification';
 // import DetaiIitem from './detailitem/detailitem';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    {/* <CoverItem /> */}
-    <Notification />
+    <CoverItem />
+    {/* <Notification /> */}
     {/* <DetaiIitem/> */}
   </React.StrictMode>
 );

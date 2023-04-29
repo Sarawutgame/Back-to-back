@@ -13,7 +13,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import axios from 'axios';
+// import axios from 'axios';
 
 
 
@@ -28,8 +28,8 @@ function Item(props) {
     //     setFile(URL.createObjectURL(e.target.files[0]));
     // }
     const { id, itemname, image, itemtype, dateend, price } = props;
-    console.log(id, image);
-    console.log(itemtype == 'bit')
+    // console.log(id, image);
+    // console.log(itemtype === 'bit')
     return (
         <div className='card-item'>
             <img src={sunflower} className="item-image" alt="logo" />
@@ -37,20 +37,20 @@ function Item(props) {
                 <p style={{ margin: '0', fontSize: 14 }}>{itemname}</p>
                 <div style={{ margin: '0', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                     {
-                        itemtype == 'give' &&
+                        itemtype === 'give' &&
                         <h4 style={{ margin: '0', fontSize: 22, color: '#E5529B', fontWeight: 300 }}>ส่งต่อ</h4>
                     }
                     {
-                        itemtype == 'sell' &&
+                        itemtype === 'sell' &&
                         <h4 style={{ margin: '0', fontSize: 22, color: '#05AB9F', fontWeight: 300 }}>฿{price}</h4>
                     }
                     {
-                        itemtype == 'bit' &&
+                        itemtype === 'bit' &&
                         <h4 style={{ margin: '0', fontSize: 22, color: '#DB00FF', fontWeight: 300 }}>฿{price}</h4>
                     }
                     <div style={{ display: 'flex' }}>
                         {
-                            itemtype == 'bit' &&
+                            itemtype === 'bit' &&
                             <h4 style={{ margin: '0', fontSize: 12, color: '#E0352D', fontWeight: 300, verticalAlign: 'text-bottom', marginTop: '1vh' }}>หมดวันที่ {dateend}</h4>
                         }
 
@@ -69,7 +69,9 @@ function Item(props) {
 function CoverItem() {
     const [file, setFile] = useState();
     const [fileimg, setfileimg] = useState();
-    const [descrip, setdescrip] = useState('Demotest');
+    const [imgPath, setImgPath] = useState();
+    
+    // const [descrip, setdescrip] = useState('Demotest');
 
     async function UploadimageToNode(){
         const fromData = new FormData();
@@ -83,8 +85,31 @@ function CoverItem() {
         .then((res) => res.json())
         .then((value) => {
             console.log(value.fileurl);
+            setImgPath(value.fileurl);
         })
         .catch(err => console.log(err));
+
+        const itemForm = new FormData();
+        const itemJson = {
+            imagePath: imgPath,
+            name: "Pun",
+            type: "ขาย",
+            desc: "asdf",
+            tag: "bruh",
+            price: "200"
+        }
+
+        // const newJSON = JSON.stringify(itemJson)
+        // itemForm.append("Json", itemJson)
+
+        await fetch("http://localhost:3005/createItem", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(itemJson),
+        })
+        .then((res) => res.json())
     }
 
     function handleImg(e) {

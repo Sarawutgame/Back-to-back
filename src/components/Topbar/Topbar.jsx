@@ -3,15 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import "./topbar.css"
 import logo from "../../logo.svg"
+import { useNavigate } from 'react-router-dom'
 
 export default function Topbar() {
+    const navigate = useNavigate();
   return (
     <div className='topbarContainer'>
         <div className="topbarLeft">
-            <span className="logo">Back2back</span>
+            <span className="logo" onClick={()=>navigate('/')}>Back2back</span>
             <div className="topbarLinks">
-                <span className="topbarLink">หน้าแรก</span>
-                <span className="topbarLink">หาสิ่งของ</span>
+                <span className="topbarLink" onClick={()=>navigate('/')}>หน้าแรก</span>
+                <span className="topbarLink" onClick={()=>navigate('/listitem')}>หาสิ่งของ</span>
             </div>
         </div>
         <div className="topbarCenter">
@@ -26,7 +28,7 @@ export default function Topbar() {
         <div className="topbarRight">
             <div className="topbarProfile">
                 <span className="name">user</span>
-                <img src={logo} alt="" className="profileImg"/>
+                <img src={logo} alt="" className="profileImg" onClick={()=>navigate('/profile')}/>
             </div>
         </div>
     </div>

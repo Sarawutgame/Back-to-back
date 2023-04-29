@@ -173,8 +173,11 @@ function CoverItem() {
                                     <div className='box-over'>
                                         <div style={{ marginBottom: '2%' }}>
                                             <h3 style={{ margin: '0', marginLeft: '2%' }}>รูปภาพ</h3>
-                                            <input type="file" onChange={handleImg} placeholder="รูปภาพ" style={{ width: '90%', height: '100px', borderRadius: '20px', padding: '2%' }} />
-                                            <img src={file}></img>
+                                            <input type="file" onChange={handleImg} placeholder="รูปภาพ" style={{ width: '90%', height: '50px', borderRadius: '20px', padding: '2%' }} className='up-input-css' />
+                                            <div className='contraner-up-image'>
+                                                <img src={file} className='up-image'></img>
+                                            </div>
+                                            
                                         </div>
                                         <div style={{ marginBottom: '2%' }}>
                                             <h3 style={{ margin: '0', marginLeft: '2%' }}>ชื่อ</h3>

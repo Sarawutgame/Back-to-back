@@ -9,7 +9,7 @@ function NotiItemToOhter(){
           <h2 style={{margin:'0'}}>Punnaton Khasawick</h2>
           <h3 style={{margin:'0'}}>ดอกไม่เเห้ง</h3>
           <h3 style={{margin:'0', color:'#E5529B'}}>ขาย</h3>
-          <h3 style={{margin:'0'}}>ได้คืวที่ 2</h3>
+          <h3 style={{margin:'0'}}>รอการยืนยัน</h3>
           
         </div>
         <div className='picture'>
@@ -27,7 +27,14 @@ function NotiItemToMe(){
           <h2 style={{margin:'0'}}>Punnaton Khasawick</h2>
           <h3 style={{margin:'0'}}>ดอกไม่เเห้ง</h3>
           <h3 style={{margin:'0', color:'#E5529B'}}>ขาย</h3>
-          <h3 style={{margin:'0'}}>คนที่ 1</h3>
+          <div>
+            <button className='summit-button'>
+              <h3 style={{ margin: 0, fontWeight: 300, color: 'white' }}>ยืนยัน</h3>
+            </button>
+            <button className='reject-button'>
+              <h3 style={{ margin: 0, fontWeight: 300, color: 'white' }}>ปฎิเสธ</h3>
+            </button>
+          </div>
           
         </div>
         <div className='picture'>

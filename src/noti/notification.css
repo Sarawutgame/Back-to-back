@@ -116,3 +116,22 @@ body{
     
     ::-webkit-scrollbar-thumb:hover {
     background:rgb(31, 31, 31); }
+
+.summit-button{
+    width: 100px;
+    height: 40px;
+    border-radius: 30px;
+    border-color: #F9F9F9;
+    background-color: #05AB9F;
+    border:0px;
+    margin-right: 10px;
+}
+
+.reject-button{
+    width: 100px;
+    height: 40px;
+    border-radius: 30px;
+    border-color: #F9F9F9;
+    background-color: #ca342f;
+    border:0px;
+}

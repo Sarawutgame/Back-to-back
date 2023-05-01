@@ -82,6 +82,7 @@ body{
     border-color: #F9F9F9;
     background-color: #05AB9F;
     border:0px;
+    cursor: pointer;
 }
 
 .modal-create-item{

@@ -52,6 +52,11 @@
     flex-direction: column;
 }
 
+.social{
+    display: flex;
+    flex-direction: column;
+}
+
 .profileButton{
     border: 1px solid;
     text-align: center;

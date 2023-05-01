@@ -13,6 +13,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
+import Topbar from '../components/Topbar/Topbar';
 // import axios from 'axios';
 
 
@@ -70,8 +71,24 @@ function CoverItem() {
     const [file, setFile] = useState();
     const [fileimg, setfileimg] = useState();
     const [imgPath, setImgPath] = useState();
-    
-    // const [descrip, setdescrip] = useState('Demotest');
+    const [name, setName] = useState('');
+    const [desc, setDesc] = useState('');
+    const [tag, setTag] = useState('');
+    const [price, setPrice] = useState('');
+    const [typeItem, settypeItem] = React.useState('');
+
+    const inputName = (event) => {
+        setName(event.target.value);
+    }
+    const inputDesc = (event) => {
+        setDesc(event.target.value);
+    }
+    const inputTag = (event) => {
+        setTag(event.target.value);
+    }
+    const inputPrice = (event) => {
+        setPrice(event.target.value);
+    }
 
     async function UploadimageToNode(){
         const fromData = new FormData();
@@ -89,19 +106,19 @@ function CoverItem() {
         })
         .catch(err => console.log(err));
 
-        const itemForm = new FormData();
+        // const itemForm = new FormData();
         const itemJson = {
             imagePath: imgPath,
-            name: "Pun",
-            type: "ขาย",
-            desc: "asdf",
-            tag: "bruh",
-            price: "200"
+            name: name,
+            type: typeInItem,
+            desc: desc,
+            tag: tag,
+            price: price
         }
 
         // const newJSON = JSON.stringify(itemJson)
         // itemForm.append("Json", itemJson)
-
+        console.log(itemJson)
         await fetch("http://localhost:3005/createItem", {
             method: 'POST',
             headers: {
@@ -117,7 +134,6 @@ function CoverItem() {
         setfileimg(e.target.files[0]);
         setFile(URL.createObjectURL(e.target.files[0]));
     }
-    const [typeItem, settypeItem] = React.useState('');
 
     const handleChange = (event) => {
         settypeItem(event.target.value);
@@ -131,6 +147,7 @@ function CoverItem() {
     const [typeInItem, settypeInItem] = React.useState('');
     const handleInChange = (event) => {
         settypeInItem(event.target.value);
+        // console.log(typeInItem)
     };
 
     const mockItem = [{ id: '1', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },
@@ -141,6 +158,8 @@ function CoverItem() {
     { id: '6', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },]
 
     return (
+        <>
+        <Topbar />
         <div className="contrainer">
             <div className='div1'>
                 <h1 style={{ marginBottom: '0', marginLeft: "3%" }}>รายการสิ่งของ</h1>
@@ -206,7 +225,7 @@ function CoverItem() {
                                         </div>
                                         <div style={{ marginBottom: '2%' }}>
                                             <h3 style={{ margin: '0', marginLeft: '2%' }}>ชื่อ</h3>
-                                            <input type="text" placeholder="Name" style={{ width: '90%', height: '40px', borderRadius: '20px', padding: '2%' }} />
+                                            <input type="text" placeholder="Name" style={{ width: '90%', height: '40px', borderRadius: '20px', padding: '2%' }} onChange={inputName} value={name}/>
                                         </div>
 
                                         <div style={{ marginBottom: '2%' }}>
@@ -218,27 +237,23 @@ function CoverItem() {
                                                 label="ทั้งหมด"
                                                 onChange={handleInChange}
                                                 style={{ width: '50%', borderRadius: '20px', height: '40px', borderColor: 'black' }}
-                                            >
-                                                <MenuItem value={10} >ให้</MenuItem>
-                                                <MenuItem value={30}>ขาย</MenuItem>
-                                                <MenuItem value={40}>ประมูล</MenuItem>
+                                                >
+                                                <MenuItem value={"give"} >ให้</MenuItem>
+                                                <MenuItem value={"sell"}>ขาย</MenuItem>
+                                                <MenuItem value={"auction"}>ประมูล</MenuItem>
                                             </Select>
                                         </div>
                                         <div style={{ marginBottom: '2%' }}>
                                             <h3 style={{ margin: '0', marginLeft: '2%' }}>ราคา</h3>
-                                            <input type='number' placeholder="Price" style={{ width: '50%', height: '40px', borderRadius: '20px', padding: '2%' }} />
+                                            <input type='number' placeholder="Price" style={{ width: '50%', height: '40px', borderRadius: '20px', padding: '2%' }} onChange={(inputPrice)} value={price}/>
                                         </div>
                                         <div style={{ marginBottom: '2%' }}>
                                             <h3 style={{ margin: '0', marginLeft: '2%' }}>คำอธิบาย</h3>
-                                            <textarea placeholder="คำอธิบาย" rows={3} style={{ width: '90%', borderRadius: '20px', padding: '2%' }} />
+                                            <textarea placeholder="คำอธิบาย" rows={3} style={{ width: '90%', borderRadius: '20px', padding: '2%' }} onChange={(inputDesc)} value={desc}/>
                                         </div>
                                         <div style={{ marginBottom: '2%' }}>
                                             <h3 style={{ margin: '0', marginLeft: '2%' }}>TAG</h3>
-                                            <input type='number' placeholder="Price" style={{ width: '50%', height: '40px', borderRadius: '20px', padding: '2%' }} />
-                                        </div>
-                                        <div style={{ marginBottom: '2%' }}>
-                                            <h3 style={{ margin: '0', marginLeft: '2%' }}>ราคา</h3>
-                                            <input type='number' placeholder="Price" style={{ width: '50%', height: '40px', borderRadius: '20px', padding: '2%' }} />
+                                            <input type='text' placeholder="Tag" style={{ width: '50%', height: '40px', borderRadius: '20px', padding: '2%' }} onChange={(inputTag)} value={tag}/>
                                         </div>
                                     </div>
                                 </form>
@@ -253,6 +268,7 @@ function CoverItem() {
                 </Modal>
             </div>
         </div>
+        </>
 
 
 

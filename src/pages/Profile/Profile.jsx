@@ -30,9 +30,10 @@ export default function Profile() {
                     <div className="profileLink">
                         <span>ช่องทางการติดต่อ</span>
                         <div className="social">
-                            <span>link</span>    
-                            <span>link</span>    
-                            <span>link</span>    
+                            <span>Instagram: </span>
+                            <span>Facebook: </span>
+                            <span>Twitter: </span>
+                            <span>Line: </span>
                         </div>
                     </div>
                     <div className="profileButtons">

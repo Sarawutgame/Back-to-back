@@ -54,15 +54,6 @@ function RegisterForm() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [faculty, setFaculty] = useState('')
 
-    // const userJson = {
-    //     imagePath: "",
-    //     username: username,
-    //     email: email,
-    //     password: password,
-    //     phone: phoneNumber,
-    //     faculty: faculty
-    // }
-
     function handleUsernameChange(event) {
         setUsername(event.target.value);
     }
@@ -88,10 +79,29 @@ function RegisterForm() {
         setFaculty(event.target.value);
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         // event.preventDefault();
         // registerUser(username, email, password);
-
+        const userJson = {
+            imagePath: "",
+            username: username,
+            email: email,
+            password: password,
+            phone: phoneNumber,
+            faculty: faculty,
+            ig: "",
+            fb: "",
+            twit: "",
+            line: ""
+        }
+        await fetch("http://localhost:3005/register", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userJson),
+        })
+        .then((res) => res.json())
     }
 
     // function handleSubmit(event) {
@@ -110,22 +120,18 @@ function RegisterForm() {
                     <p className='label-text'>รหัสผ่าน</p>
                     <input className='text-input' type='password' value={password} onChange={handlePasswordChange}></input>
                     <p className='label-text'>ยืนยันรหัสผ่าน</p>
-                    <input className='text-input' type='password' value={repassword} onchange={handleRePasswordChange}></input>
+                    <input className='text-input' type='password' value={repassword} onChange={handleRePasswordChange}></input>
                     <p className='label-text'>อีเมล</p>
                     <input className='text-input' type='email' value={email} onChange={handleEmailChange}></input>
                     <p className='label-text'>เบอร์โทรศัพท์</p>
                     <input className='text-input' type='tel' value={phoneNumber} onChange={handlePhoneNumber} maxLength={10} pattern="^-?[0-9]\d*\.?\d*$" required></input>
                     <p className='label-text'>คณะ</p>
                     <input className='text-input' type='tel' value={faculty} onChange={handleFacultyChange}></input>
-
                 </div>
-                <button className='button-register' type='submit' onSubmit={handleSubmit}>สมัครสมาชิก</button>
-
-
-
-
-
             </form>
+            <div className='submitButton'>
+                <button className='button-register' onClick={handleSubmit}>สมัครสมาชิก</button>
+            </div>
             {/* <button>ยังไม่มีบัญชีสมัครได้เลย</button> */}
         </div>
     )

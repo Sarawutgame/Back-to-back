@@ -13,6 +13,9 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart, faComment, faFlag, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+
 
 
 
@@ -21,7 +24,7 @@ import Fade from '@mui/material/Fade';
 function DetaiIitem() {
   const nameitem = 'ดอกไม้ตกแต่ง';
   const tag = ['อุปกรณ์การเรียน', 'ดอกไม้'];
-  const typeitem = 'sell';
+  const typeitem = 'bit';
   const price = 30;
   const start_price = 30;
   const end_date = '08/04/2023'
@@ -33,12 +36,52 @@ function DetaiIitem() {
   
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+  }
 
   const [open2, setOpen2] = React.useState(false);
   const handleOpen2 = () => setOpen2(true);
-  const handleClose2 = () => setOpen2(false);
+  const handleClose2 = () => {
+    setOpen2(false);
+  }
 
+  const [reportDes, setReportDes] = React.useState('');
+
+
+  function summitInterest(){
+    alert('เพิ่มความสนใจเเล้ว');
+  }
+
+  function InputReportDes(event){
+    setReportDes(event.target.value);
+  }
+
+  const [bitPrice, setBitPrice] = React.useState('');
+
+  function InputPriceBit(event){
+    setBitPrice(event.target.value);
+  }
+
+  function summitReport(){
+    console.log(reportDes);
+    if(reportDes.length <= 0){
+      alert('โปรดใส่รายระเอียด');
+    }
+    else{
+      handleClose2();
+    }
+  }
+
+  function summitBit(){
+    if(bitPrice / price >= 1.05){
+      alert('เพิ่มราคาสำเร็จเเล้ว');
+      handleClose2();
+    }
+    else{
+      alert('โปรดใส่ราคาให้มากกว่า 5% ของราคาสินค้า');
+    }
+  }
 
 
   return (
@@ -82,8 +125,11 @@ function DetaiIitem() {
             }
             
             <div className='icon-item'>
-                <img src={logo} className='icon' alt='iconic'/>
-                <img src={logo} className='icon' alt='iconic'/>
+                <button className='button-icon' onClick={handleOpen}>
+                  <FontAwesomeIcon icon={faFlag} className="icon-report"/>
+                </button>
+                {/* <img src={logo} className='icon' alt='iconic'/>
+                <img src={logo} className='icon' alt='iconic'/> */}
             </div>
           </div>
           <div className='line-contrainer'>
@@ -106,18 +152,18 @@ function DetaiIitem() {
           <div className='buttom-group'>
 
                 {typeitem == 'bit' &&
-                  <button className='buttom-pass' onClick={handleOpen}>
+                  <button className='buttom-pass' onClick={handleOpen2}>
                     <h2 style={{margin: 0, fontWeight:300, color:'white'}}>เสนอราคาสินค้า</h2>
                   </button>
                 }
                 {typeitem == 'sell' &&
-                <button className='buttom-pass' onClick={handleOpen2}>
+                <button className='buttom-pass' onClick={summitInterest}>
                   <h2 style={{margin: 0, fontWeight:300, color:'white'}}>สนใจของ</h2>
                 </button>
                   
                 }
                 {typeitem == 'give' &&
-                <button className='buttom-pass' onClick={handleOpen}>
+                <button className='buttom-pass' onClick={summitInterest}>
                   <h2 style={{margin: 0, fontWeight:300, color:'white'}}>สนใจของ</h2>
                 </button>
                   
@@ -162,12 +208,12 @@ function DetaiIitem() {
                                 </div>
                                 <div style={{marginBottom:'2%'}}>
                                     <h3 style={{margin:'0', marginLeft:'2%'}}>คำอธิบาย</h3>
-                                    <textarea placeholder="คำอธิบาย" rows={3} style={{width:'90%', borderRadius:'20px',padding:'2%'}}/>
+                                    <textarea placeholder="คำอธิบาย" rows={3} style={{width:'90%', borderRadius:'20px',padding:'2%'}} value={reportDes} onChange={InputReportDes}/>
                                 </div>
                             </div>
                         </form>
                         <div className='button-con'>
-                            <button className='button-summit' onClick={handleClose}>
+                            <button className='button-summit' onClick={summitReport}>
                                 <h2 style={{margin: 0, fontWeight:300, color:'white'}}>รายงาน!</h2>
                             </button>
                         </div>
@@ -205,8 +251,12 @@ function DetaiIitem() {
                                     <input type="text" placeholder="Name" style={{width:'90%', height:'40px', borderRadius:'20px',padding:'2%'}} readOnly/>
                                 </div>
                                 <div style={{marginBottom:'2%'}}>
+                                    <h3 style={{margin:'0', marginLeft:'2%'}}>ราคาปัจจุบัน</h3>
+                                    <input type="number" placeholder="Name" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}} value={price} readOnly/>
+                                </div>
+                                <div style={{marginBottom:'2%'}}>
                                     <h3 style={{margin:'0', marginLeft:'2%'}}>ราคา</h3>
-                                    <input type="number" placeholder="Name" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}}/>
+                                    <input type="number" placeholder="Name" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}} value={bitPrice} onChange={InputPriceBit}/>
                                 </div>
                                 <div style={{marginBottom:'2%'}}>
                                     <h3 style={{margin:'0', marginLeft:'2%'}}>*ราคาประมูลต้องมากกว่าราคาสินค้า ณ ปัจจุบัน</h3>
@@ -214,7 +264,7 @@ function DetaiIitem() {
                             </div>
                         </form>
                         <div className='button-con'>
-                            <button className='button-summit' onClick={handleClose2}>
+                            <button className='button-summit' onClick={summitBit}>
                                 <h2 style={{margin: 0, fontWeight:300, color:'white'}}>ประมูล</h2>
                             </button>
                         </div>

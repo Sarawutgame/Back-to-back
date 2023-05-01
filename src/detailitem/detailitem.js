@@ -15,6 +15,7 @@ import Fade from '@mui/material/Fade';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faComment, faFlag, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { useEffect, useState } from 'react';
 
 
 
@@ -22,17 +23,75 @@ import { faHeart, faComment, faFlag, faPenToSquare } from '@fortawesome/free-sol
 
 
 function DetaiIitem() {
-  const nameitem = 'ดอกไม้ตกแต่ง';
+  const [telltype, setTelltype] = useState('สิ่งของ')
+  const [pulldetail, setPullDetail] = useState(false);
+    // let allitem = []
+  const [detailitemlist, setDetailItemList] = useState({
+    imagePath:'',
+    name:'',
+    type:'',
+    desc:'',   
+    tag:'',
+    price:'',
+    iduser:'',
+    nameuser:'',
+    status:'',
+    _id:'',
+    __v:'',
+  });
+
+  const [userDetail, setuserDetail]= useState({
+    _id:'',
+    username:'',
+    email:'',
+    password:'',
+    phone:'',
+    faculty:'',
+    ig:'',
+    fb:'',
+    twit:'',
+    line:'',
+    __v:'',
+    imageuserpath:'https://postimagebucket.s3.amazonaws.com/e3fa12a0-77c0-48d0-ad6c-26771ee872bf.jpg',
+  })
+  const id_props = '644ff89d243d6fbd79f0733e';
+  const userid_props = '644fc1664a26b861c8170394';
   const tag = ['อุปกรณ์การเรียน', 'ดอกไม้'];
-  const typeitem = 'bit';
-  const price = 30;
-  const start_price = 30;
-  const end_date = '08/04/2023'
-  const person_interest = 0;
-  const detailitem = 'ดอกไม่เเห้ง ดอกไม่เเห้ง ดอกไม่เเห้ง ดอกไม่เเห้ง ดอกไม่เเห้ง ดอกไม่เเห้ง ดอกไม่เเห้ง ดอกไม่เเห้ง ดอกไม่เเห้ง ดอกไม่เเห้ง ดอกไม่เเห้ง ดอกไม่เเห้ง'
-  const user = {id_user:'123456',user_name:'Punnaton Khasawick', give_away:4}
 
 
+  useEffect(() => {
+    fetch("http://localhost:3005/getitem/" + id_props, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then((res) => res.json())
+    .then((value) => {
+        setDetailItemList(value);
+        // allitem=value;
+        // console.log(allitem);
+        
+        })
+    
+    fetch("http://localhost:3005/userById/" + userid_props, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then((res) => res.json())
+    .then((value) => {
+        setuserDetail(value);
+        // allitem=value;
+        // console.log(allitem);
+        console.log(userDetail);
+        console.log(detailitemlist);
+        setPullDetail(true)
+        })
+    
+    //Runs only on the first render
+  }, [pulldetail]);
   
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -63,36 +122,52 @@ function DetaiIitem() {
     setBitPrice(event.target.value);
   }
 
-  function summitReport(){
+  async function summitReport(){
     console.log(reportDes);
     if(reportDes.length <= 0){
       alert('โปรดใส่รายระเอียด');
     }
     else{
-      handleClose2();
+      const itemJson = {
+        namereport: detailitemlist.name,
+        typereport: 'item',
+        desc: reportDes,
+        iditem: detailitemlist._id,
+      }
+      await fetch("http://localhost:3005/createReport", {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(itemJson),
+      })
+      .then((res) => res.json()).then(() => {
+          alert('ส่งรายงานเรียบร้อยเเล้ว');
+      })
+      handleClose();
     }
   }
 
-  function summitBit(){
-    if(bitPrice / price >= 1.05){
-      alert('เพิ่มราคาสำเร็จเเล้ว');
-      handleClose2();
-    }
-    else{
-      alert('โปรดใส่ราคาให้มากกว่า 5% ของราคาสินค้า');
-    }
-  }
+  // function summitBit(){
+  //   if(bitPrice / price >= 1.05){
+  //     alert('เพิ่มราคาสำเร็จเเล้ว');
+  //     handleClose2();
+  //   }
+  //   else{
+  //     alert('โปรดใส่ราคาให้มากกว่า 5% ของราคาสินค้า');
+  //   }
+  // }
 
 
   return (
     <div className="contrainer">
       <div className='inner-contrainer'>
           <div className='header-image'>
-            <img src={sunflower} className='image-head' alt='logo'/>
+            <img src={detailitemlist.imagePath} className='image-head' alt='logo'/>
           </div>
 
           <div className='name-contrainer'>
-            <h2 className='name-item'>{nameitem}</h2>
+            <h2 className='name-item'>{detailitemlist.name}</h2>
             <div className='group-tag'>
                 {tag.map((tag_item) =>{
                     return <h4 className='tag-item' key={tag_item}>#{tag_item}</h4>
@@ -102,25 +177,25 @@ function DetaiIitem() {
           </div>
 
           <div className='detail-contrainer'>
-            {typeitem == 'bit' &&
+            {/* {typeitem == 'bit' &&
               <div className='color-detail'>
                 <h4 className='change-tag' style={{color:'#DB00FF'}}>ประมูล</h4>
                 <h4 className='change-tag' style={{color:'#E5529B'}}>ราคาปัจจุบัน {price} บาท</h4>
                 <h4 className='change-tag' style={{color:'#C7C8C7'}}>ราคาเริ่มต้น {start_price} บาท</h4>
                 <h4 className='change-tag' style={{color:'#E0352D'}}>หมดวันที่ {end_date}</h4>
               </div>
-            }
-            {typeitem == 'sell' &&
+            } */}
+            {detailitemlist.type == 'sell' &&
               <div className='color-detail'>
                 <h4 className='change-tag' style={{color:'#05AB9F'}}>ขาย</h4>
-                <h4 className='change-tag' style={{color:'#05AB9F'}}>฿ {price}</h4>
-                <h4 className='change-tag' style={{color:'#000000'}}>จำนวนคิว {person_interest} คิว</h4>
+                <h4 className='change-tag' style={{color:'#05AB9F'}}>฿ {detailitemlist.price}</h4>
+                {/* <h4 className='change-tag' style={{color:'#000000'}}>จำนวนคิว {person_interest} คิว</h4> */}
               </div>
             }
-            {typeitem == 'give' &&
+            {detailitemlist.type == 'give' &&
               <div className='color-detail'>
                 <h4 className='change-tag' style={{color:'#E5529B'}}>ส่งต่อ</h4>
-                <h4 className='change-tag' style={{color:'#000000'}}>จำนวนคิว {person_interest} คิว</h4>
+                {/* <h4 className='change-tag' style={{color:'#000000'}}>จำนวนคิว {person_interest} คิว</h4> */}
               </div>
             }
             
@@ -136,9 +211,9 @@ function DetaiIitem() {
             <hr className='line'/>
           </div>
           <div className='profile-tag'>
-            <img src={logo} className='image-profile' alt='profile'/>
-            <h4 className='name-tag'>{user.user_name}</h4>
-            <p className='give-tag'>จำนวนการให้ {user.give_away}</p>
+            <img src={userDetail.imageuserpath} className='image-profile' alt='profile'/>
+            <h4 className='name-tag'>{userDetail.username}</h4>
+            <p className='give-tag'>จำนวนการให้ {userDetail.faculty}</p>
           </div>
           <div className='line-contrainer'>
             <hr className='line'/>
@@ -147,22 +222,22 @@ function DetaiIitem() {
             <h2>รายละเอียดสินค้า</h2>
           </div>
           <div className='detail-item'>
-            <h3 className='text-detail'>{detailitem}</h3>
+            <h3 className='text-detail'>{detailitemlist.desc}</h3>
           </div>
           <div className='buttom-group'>
 
-                {typeitem == 'bit' &&
+                {detailitemlist.type == 'bit' &&
                   <button className='buttom-pass' onClick={handleOpen2}>
                     <h2 style={{margin: 0, fontWeight:300, color:'white'}}>เสนอราคาสินค้า</h2>
                   </button>
                 }
-                {typeitem == 'sell' &&
+                {detailitemlist.type == 'sell' &&
                 <button className='buttom-pass' onClick={summitInterest}>
                   <h2 style={{margin: 0, fontWeight:300, color:'white'}}>สนใจของ</h2>
                 </button>
                   
                 }
-                {typeitem == 'give' &&
+                {detailitemlist.type == 'give' &&
                 <button className='buttom-pass' onClick={summitInterest}>
                   <h2 style={{margin: 0, fontWeight:300, color:'white'}}>สนใจของ</h2>
                 </button>
@@ -199,12 +274,12 @@ function DetaiIitem() {
                         <form>
                             <div className='box-over'>
                                 <div style={{marginBottom:'2%'}}>
-                                    <h3 style={{margin:'0', marginLeft:'2%'}}>ชื่อ</h3>
-                                    <input type="text" placeholder="Name" style={{width:'90%', height:'40px', borderRadius:'20px',padding:'2%'}} readOnly/>
+                                    <h3 style={{margin:'0', marginLeft:'2%'}}>ชื่อที่ถูกรายงาน</h3>
+                                    <input type="text" placeholder="Name" style={{width:'90%', height:'40px', borderRadius:'20px',padding:'2%'}} value={detailitemlist.name} readOnly/>
                                 </div>
                                 <div style={{marginBottom:'2%'}}>
                                     <h3 style={{margin:'0', marginLeft:'2%'}}>ประเภท</h3>
-                                    <input type="text" placeholder="Name" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}} readOnly/>
+                                    <input type="text" placeholder="Name" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}} value={telltype} readOnly/>
                                 </div>
                                 <div style={{marginBottom:'2%'}}>
                                     <h3 style={{margin:'0', marginLeft:'2%'}}>คำอธิบาย</h3>
@@ -252,7 +327,7 @@ function DetaiIitem() {
                                 </div>
                                 <div style={{marginBottom:'2%'}}>
                                     <h3 style={{margin:'0', marginLeft:'2%'}}>ราคาปัจจุบัน</h3>
-                                    <input type="number" placeholder="Name" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}} value={price} readOnly/>
+                                    <input type="number" placeholder="Name" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}} value={detailitemlist.price} readOnly/>
                                 </div>
                                 <div style={{marginBottom:'2%'}}>
                                     <h3 style={{margin:'0', marginLeft:'2%'}}>ราคา</h3>
@@ -264,7 +339,8 @@ function DetaiIitem() {
                             </div>
                         </form>
                         <div className='button-con'>
-                            <button className='button-summit' onClick={summitBit}>
+                            {/* อย่าลืมใส่ onclick summitbit */}
+                            <button className='button-summit'>
                                 <h2 style={{margin: 0, fontWeight:300, color:'white'}}>ประมูล</h2>
                             </button>
                         </div>

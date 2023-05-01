@@ -5,8 +5,8 @@ import Profile from './pages/Profile/Profile';
 // import CoverItem from './listitem/listitem';
 import RegisterForm from './components/Register';  
 import Login from './components/Login';
-// import DetaiIitem from './detailitem/detailitem';
-import Notification from './noti/notification';
+import DetaiIitem from './detailitem/detailitem';
+// import Notification from './noti/notification';
 
 function App() {
   return <Routes>
@@ -15,8 +15,8 @@ function App() {
     <Route path="/login" element={<Login/>} />
     <Route path="/profile" element={<Profile />} />
     {/* <Route path="/listitem" element={<CoverItem />} /> */}
-    {/* <Route path="/detailitem" element={<DetaiIitem />} /> */}
-    <Route path="/noti" element={<Notification />} />
+    <Route path="/detailitem" element={<DetaiIitem />} />
+    {/* <Route path="/noti" element={<Notification />} /> */}
     
   </Routes>
 }

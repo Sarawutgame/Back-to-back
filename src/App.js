@@ -11,6 +11,7 @@ function App() {
     <Route path="/register" element={<RegisterForm/>} />
     <Route path="/profile" element={<Profile />} />
     <Route path="/listitem" element={<CoverItem />} />
+    
   </Routes>
 }
 

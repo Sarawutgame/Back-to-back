@@ -75,7 +75,7 @@ function CoverItem() {
     const [desc, setDesc] = useState('');
     const [tag, setTag] = useState('');
     const [price, setPrice] = useState('');
-    const [typeItem, settypeItem] = React.useState('');
+    const [typeItem, settypeItem] = React.useState('All');
 
     const inputName = (event) => {
         setName(event.target.value);
@@ -91,42 +91,70 @@ function CoverItem() {
     }
 
     async function UploadimageToNode(){
-        const fromData = new FormData();
-        fromData.append('avatar', fileimg);
-        console.log(file)
+        let notfillfull = false;
+        if(fileimg == null){
+            notfillfull = true;
+        }else if(name.length <= 0){
+            notfillfull = true;
+        }else if(typeInItem.length <= 0){
+            notfillfull = true;
+        }else if(desc.length <= 0){
+            notfillfull = true;
+        }else if(price.length <= 0){
+            notfillfull = true;
+        }
+        // console.log(fileimg);
+        // console.log(name.length);
+        // console.log(typeInItem);
+        // console.log(desc);
+        // console.log(price);
+        // console.log(notfillfull + '------ ANS');
+        if(notfillfull == true){
+            alert('Plase Enter Every input');
+        }else{
+            // alert('pass');
+            const fromData = new FormData();
+            fromData.append('avatar', fileimg);
+            console.log(file)
 
-        await fetch("http://localhost:3005/upload", {
-            method: 'POST',
-            body: fromData,
-        })
-        .then((res) => res.json())
-        .then((value) => {
-            console.log(value.fileurl);
-            setImgPath(value.fileurl);
-        })
-        .catch(err => console.log(err));
+            await fetch("http://localhost:3005/upload", {
+                method: 'POST',
+                body: fromData,
+            })
+            .then((res) => res.json())
+            .then((value) => {
+                console.log(value.fileurl);
+                setImgPath(value.fileurl);
+            })
+            .catch(err => console.log(err));
 
-        // const itemForm = new FormData();
-        const itemJson = {
-            imagePath: imgPath,
-            name: name,
-            type: typeInItem,
-            desc: desc,
-            tag: tag,
-            price: price
+            // const itemForm = new FormData();
+            const itemJson = {
+                imagePath: imgPath,
+                name: name,
+                type: typeInItem,
+                desc: desc,
+                tag: tag,
+                price: price
+            }
+
+            // const newJSON = JSON.stringify(itemJson)
+            // itemForm.append("Json", itemJson)
+            console.log(itemJson)
+            await fetch("http://localhost:3005/createItem", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(itemJson),
+            })
+            .then((res) => res.json())
         }
 
-        // const newJSON = JSON.stringify(itemJson)
-        // itemForm.append("Json", itemJson)
-        console.log(itemJson)
-        await fetch("http://localhost:3005/createItem", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(itemJson),
-        })
-        .then((res) => res.json())
+
+
+
+        
     }
 
     function handleImg(e) {
@@ -174,10 +202,10 @@ function CoverItem() {
                         <MenuItem value="">
                             <em>เลือก Type</em>
                         </MenuItem>
-                        <MenuItem value={10}>ทั้งหมด</MenuItem>
-                        <MenuItem value={20}>ให้</MenuItem>
-                        <MenuItem value={30}>ขาย</MenuItem>
-                        <MenuItem value={40}>ประมูล</MenuItem>
+                        <MenuItem value="All">ทั้งหมด</MenuItem>
+                        <MenuItem value='give'>ให้</MenuItem>
+                        <MenuItem value='sell'>ขาย</MenuItem>
+                        <MenuItem value='bit'>ประมูล</MenuItem>
                     </Select>
                 </FormControl>
             </div>
@@ -238,6 +266,9 @@ function CoverItem() {
                                                 onChange={handleInChange}
                                                 style={{ width: '50%', borderRadius: '20px', height: '40px', borderColor: 'black' }}
                                                 >
+                                                <MenuItem value={""}>
+                                                    <em>โปรดเลือกประเภท</em>
+                                                </MenuItem>
                                                 <MenuItem value={"give"} >ให้</MenuItem>
                                                 <MenuItem value={"sell"}>ขาย</MenuItem>
                                                 <MenuItem value={"auction"}>ประมูล</MenuItem>

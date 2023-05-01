@@ -24,16 +24,16 @@ import './Register.css';
 //     }
 //   });
 
-function registerUser(username, email, password) {
-    const params = {
-        TableName: 'Register',
-        Item: {
-            'username': { S: username },
-            'email': { S: email },
-            'password': { S: password },
-        }
-    };
-}
+// function registerUser(username, email, password) {
+//     const params = {
+//         TableName: 'Register',
+//         Item: {
+//             'username': { S: username },
+//             'email': { S: email },
+//             'password': { S: password },
+//         }
+//     };
+// }
 // dynamodb.putItem(params, function (err, data) {
 //     if (err) {
 //         console.error('Error registering user:', err);
@@ -50,6 +50,18 @@ function RegisterForm() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [repassword, setRePassword] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [faculty, setFaculty] = useState('')
+
+    // const userJson = {
+    //     imagePath: "",
+    //     username: username,
+    //     email: email,
+    //     password: password,
+    //     phone: phoneNumber,
+    //     faculty: faculty
+    // }
 
     function handleUsernameChange(event) {
         setUsername(event.target.value);
@@ -62,16 +74,30 @@ function RegisterForm() {
     function handlePasswordChange(event) {
         setPassword(event.target.value);
     }
-
-    function handleSubmit(event) {
-        event.preventDefault();
-        registerUser(username, email, password);
+    function handleRePasswordChange(event) {
+        setRePassword(event.target.value);
+    }
+    
+    function handlePhoneNumber(event) {
+        const val = event.target.value
+        if (event.target.validity.valid) setPhoneNumber(event.target.value);
+        else if (val === '' || val === '-') setPhoneNumber(val);
+    }
+    
+    function handleFacultyChange(event) {
+        setFaculty(event.target.value);
     }
 
     function handleSubmit(event) {
-        event.preventDefault();
-        registerUser(username, email, password);
-      }
+        // event.preventDefault();
+        // registerUser(username, email, password);
+
+    }
+
+    // function handleSubmit(event) {
+    //     event.preventDefault();
+    //     registerUser(username, email, password);
+    //   }
 
     return (
 
@@ -79,19 +105,21 @@ function RegisterForm() {
             <form className="Register-form">
                 <h1>สมัครสมาชิก</h1>
                 <div>
-                    <p>ชื่อ</p>
-                    <input type='text' value={username} onChange={handleUsernameChange}></input>
-                    <p>รหัสผ่าน</p>
-                    <input type='password' value={password} onChange={handlePasswordChange}></input>
-                    <p>ยืนยันรหัสผ่าน</p>
-                    <input ></input>
-                    <p>อีเมล</p>
-                    <input type='email' value={email} onChange={handleEmailChange}></input>
-                    <p>เบอร์โทรศัพท์</p>
-                    <input></input>
+                    <p className='label-text'>ชื่อ</p>
+                    <input className='text-input' type='text' value={username} onChange={handleUsernameChange}></input>
+                    <p className='label-text'>รหัสผ่าน</p>
+                    <input className='text-input' type='password' value={password} onChange={handlePasswordChange}></input>
+                    <p className='label-text'>ยืนยันรหัสผ่าน</p>
+                    <input className='text-input' type='password' value={repassword} onchange={handleRePasswordChange}></input>
+                    <p className='label-text'>อีเมล</p>
+                    <input className='text-input' type='email' value={email} onChange={handleEmailChange}></input>
+                    <p className='label-text'>เบอร์โทรศัพท์</p>
+                    <input className='text-input' type='tel' value={phoneNumber} onChange={handlePhoneNumber} maxLength={10} pattern="^-?[0-9]\d*\.?\d*$" required></input>
+                    <p className='label-text'>คณะ</p>
+                    <input className='text-input' type='tel' value={faculty} onChange={handleFacultyChange}></input>
 
                 </div>
-                <button type='submit' onSubmit={handleSubmit}>สมัครสมาชิก</button>
+                <button className='button-register' type='submit' onSubmit={handleSubmit}>สมัครสมาชิก</button>
 
 
 

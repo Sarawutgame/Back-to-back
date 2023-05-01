@@ -17,7 +17,7 @@
     display: flex;
     width: 100%;
     height: 100vh;
-    
+    flex-direction: column;
 }
 
 .Register-form{
@@ -46,4 +46,10 @@
     font-size: 16px;
     margin: 10px;
     margin-right: 36%;
+}
+
+.submitButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

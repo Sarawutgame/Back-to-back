@@ -1,9 +1,9 @@
 import React from 'react'
 import "./modal.css"
 
-import InputLabel from '@mui/material/InputLabel';
+// import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+// import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 function Modal({ closeModal }) {

@@ -3,13 +3,22 @@ import './notification.css'
 import sunflower from '../Sunflower.jpg'
 
 function NotiItemToOhter(){
+  let status = 'reject'
   return(
     <div className='notiitem'>
         <div className='info'>
           <h2 style={{margin:'0'}}>Punnaton Khasawick</h2>
           <h3 style={{margin:'0'}}>ดอกไม่เเห้ง</h3>
           <h3 style={{margin:'0', color:'#E5529B'}}>ขาย</h3>
-          <h3 style={{margin:'0'}}>รอการยืนยัน</h3>
+          {status === 'accept' &&
+            <h3 style={{margin:'0', color:'#05AB9F'}}>ยืนยันเเล้ว</h3>
+          }
+          {status === 'pending' &&
+            <h3 style={{margin:'0'}}>รอการยืนยัน</h3>
+          }
+          {status === 'reject' &&
+            <h3 style={{margin:'0', color:'#DC143C'}}>ถูกปฎิเสธ</h3>
+          }
           
         </div>
         <div className='picture'>
@@ -21,19 +30,34 @@ function NotiItemToOhter(){
 }
 
 function NotiItemToMe(){
+  let update_status = 'reject'
   return(
+
     <div className='notiitem'>
         <div className='info'>
           <h2 style={{margin:'0'}}>Punnaton Khasawick</h2>
           <h3 style={{margin:'0'}}>ดอกไม่เเห้ง</h3>
           <h3 style={{margin:'0', color:'#E5529B'}}>ขาย</h3>
           <div>
-            <button className='summit-button'>
-              <h3 style={{ margin: 0, fontWeight: 300, color: 'white' }}>ยืนยัน</h3>
-            </button>
-            <button className='reject-button'>
-              <h3 style={{ margin: 0, fontWeight: 300, color: 'white' }}>ปฎิเสธ</h3>
-            </button>
+            {update_status === 'waiting' &&
+              <div>
+                <button className='summit-button'>
+                  <h3 style={{ margin: 0, fontWeight: 300, color: 'white' }}>ยืนยัน</h3>
+                </button>
+                <button className='reject-button'>
+                  <h3 style={{ margin: 0, fontWeight: 300, color: 'white' }}>ปฎิเสธ</h3>
+                </button>
+              </div>
+            }
+            {update_status === 'accept' &&
+              <h3 style={{margin:0}}>ให้คนนี้</h3>
+            }
+            {update_status === 'reject' &&
+              <h3 style={{margin:0}}>ปฏิเสธ</h3>
+            }
+            
+            
+            
           </div>
           
         </div>

@@ -9,7 +9,7 @@ import Select from '@mui/material/Select';
 function Modal({ closeModal }) {
   const [typeInItem, settypeInItem] = React.useState('');
   const handleInChange = (event) => {
-      settypeInItem(event.target.value);
+    settypeInItem(event.target.value);
   };
 
   return (

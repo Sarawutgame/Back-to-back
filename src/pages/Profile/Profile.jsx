@@ -20,7 +20,7 @@ export default function Profile() {
     // }
 
     useEffect(() => {
-        fetch("http://localhost:3005/userById/64506e225e0bfe6563a9d81a", {
+        fetch("http://localhost:3005/userById/644fc1664a26b861c8170394", {
             method: 'GET',
         })
         .then((res) => res.json())
@@ -37,7 +37,7 @@ export default function Profile() {
         <>
             <Topbar />
             <div className="profileContainer">
-                <img src={logo} alt="" className="profileImage"/>
+                <img src={user.imageuserpath} alt="" className="profileImage"/>
                 <span>Name</span>
                 <div className="inputContainer">
                     <span className="profileTitle">ชื่อ</span>

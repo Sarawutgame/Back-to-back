@@ -1,4 +1,4 @@
-.modalBackground{
+.profileModalBackground{
     width: 100vw;
     height: 100vh;
     /* background-color: transparent; */
@@ -8,7 +8,7 @@
     align-items: center;
 }
 
-.modalContainer {
+.profileModalContainer {
     margin-top: 120px;
     width: 500px;
     height: 800px;
@@ -20,18 +20,12 @@
     padding: 25px;
 }
 
-.titleCloseBtn {
-    margin-top: -20px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.modalTitle {
+.profileModalTitle {
     display: inline-block;
     text-align: center;
 }
 
-.line2{
+.profileLine2{
     height:2px;
     border-width:0;
     color:gray;
@@ -41,7 +35,7 @@
     margin-top: 0;
 }
 
-.modalBody {
+.profileModalBody {
     flex: 50%;
     display: flex;
     flex-direction: column;
@@ -53,14 +47,14 @@
     /* text-align: center; */
 }
 
-.modalFooter {
+.profileModalFooter {
     flex: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.modalFooter button {
+.profileModalFooter button {
     width: 150px;
     height: 45px;
     /* margin: 10px; */

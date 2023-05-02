@@ -17,16 +17,46 @@ function Modal({ closeModal }) {
     setDesc(event.target.value);
   }
 
+  const [file, setFile] = useState();
+  const [fileimg, setfileimg] = useState();
+  const [imgPath, setImgPath] = useState();
+  const [pullitem, setPullItem] = useState(false);
+
   async function createPost(){
+    let local_iduser = '644fc1664a26b861c8170394';
+    let local_nameuser = 'Pun';
+
+    
+
+    let imageURLS3 = '';
+    const fromData = new FormData();
+    fromData.append('avatar', fileimg);
+    console.log(file)
+
+    await fetch("http://localhost:3005/upload", {
+        method: 'POST',
+        body: fromData,
+    })
+    .then((res) => res.json())
+    .then((value) => {
+        console.log(value.fileurl);
+        setImgPath(value.fileurl);
+        imageURLS3=value.fileurl;
+        setPullItem(false);
+    })
+    .catch(err => console.log(err));
+
+
+
     const postJson = {
       userId: "64506e225e0bfe6563a9d81a",
+      username: "Pun",
       type: typeInItem,
       desc: desc,
-      imgPath: "",
+      imgPath: imageURLS3,
       like: 0,
-      comments: [],
+      // comments: [],
     }
-
     // console.log(JSON.stringify(postJson))
     await fetch("http://localhost:3005/createPost", {
       method: 'POST',
@@ -37,6 +67,12 @@ function Modal({ closeModal }) {
     })
     .then((res) => res.json());
   }
+
+  function handleImg(e) {
+    console.log(e.target.files);
+    setfileimg(e.target.files[0]);
+    setFile(URL.createObjectURL(e.target.files[0]));
+}
 
 
   return (
@@ -51,10 +87,18 @@ function Modal({ closeModal }) {
           <hr className='line2' />
           <div className="modalBody">
             <div className='profile-tag'>
-              <img src='https://postimagebucket.s3.amazonaws.com/0da84249-715f-4aa9-8990-ce47ce976d55.jpg' className='image-profile' alt='profile'/>
-              <h4 className='name-tag'>Game Proo</h4>
+              <img src='https://postimagebucket.s3.amazonaws.com/e3fa12a0-77c0-48d0-ad6c-26771ee872bf.jpg' className='image-profile' alt='profile'/>
+              <h4 className='name-tag'>Pun</h4>
             </div>
             <div style={{ marginBottom: '2%' }}>
+            <div style={{ marginBottom: '2%' }}>
+                    <h3 style={{ margin: '0', marginLeft: '2%' }}>รูปภาพ</h3>
+                    <input type="file" onChange={handleImg} placeholder="รูปภาพ" style={{ width: '90%', height: '50px', borderRadius: '20px', padding: '2%' }} className='up-input-css' />
+                    {/* <div className='contraner-up-image'>
+                      <img src={file} className='up-image'></img>
+                    </div> */}
+                    
+                </div>
               <h4 style={{ margin: '0', marginLeft: '2%' }}>ประเภท</h4>
               <Select
                   labelId="input-select-small"
@@ -75,8 +119,8 @@ function Modal({ closeModal }) {
             </div>
           </div>
           <div className="modalFooter">
-            <button style={{backgroundColor:'#b02121', borderRadius:'30px'}} onClick={() => closeModal(false)}>Cancel</button>
-            <button style={{backgroundColor:'#05AB9F', borderRadius:'30px'}} onClick={createPost}>Continue</button>
+            <button style={{backgroundColor:'#b02121', borderRadius:'30px'}} onClick={() => closeModal(false)}>ยกเลิก</button>
+            <button style={{backgroundColor:'#05AB9F', borderRadius:'30px'}} onClick={createPost}>โพส</button>
           </div>
         </div>
     </div>

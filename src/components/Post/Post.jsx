@@ -1,20 +1,41 @@
 import "./post.css"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faComment, faFlag, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import logo from '../../logo.svg';
+// import CommentModal from "../Modal/CommentModal/CommentModal";
 
 export default function Post(props) {
+    const [currentPost, setCurrentPost] = useState(true);
+    const [random, setRandom] = useState(false);
     // console.log(data);
     const post = props.data
+
+    useEffect(() => {
+        fetch("http://localhost:3005/getPostComment/" + post._id, {
+            method: 'GET',
+        })
+        .then((res) => res.json())
+        .then((value) => {
+            setCurrentPost(value);
+            setRandom(true);
+        })
+    }, [random])
+
+    const handleClick = async () => {
+        // const postSent = post;
+        props.handlePost(currentPost);
+        props.postId(post._id);
+        props.openCommentModal(true);
+    }
   return (
     <div className="post">
         <div className="postWrapper">
             <div className="postTop">
                 <div className="postTopLeft">
-                    <img className="postProfileImg" src={logo} alt="" />
+                    <img className="postProfileImg" src="https://postimagebucket.s3.amazonaws.com/e3fa12a0-77c0-48d0-ad6c-26771ee872bf.jpg" alt="" />
                     <div className="postInfo">
-                        <span className="postUsername">user</span>
+                        <span className="postUsername">{post.username}</span>
                         <span className="postType">{post.type}</span>
                     </div>
                 </div>
@@ -24,12 +45,12 @@ export default function Post(props) {
             </div>
             <div className="postCenter">
                 <span className="postText">{post.desc}</span>
-                <img src={logo} alt="" className="postImg" />
+                <img src={post.imgPath} alt="" className="postImg" style={{backgroundColor: "black"}}/>
             </div>
             <div className="postBottom">
                 <div className="postBottomLeft">
                     <FontAwesomeIcon icon={faHeart} className="icon"/>
-                    <FontAwesomeIcon icon={faComment} className="icon"/>
+                    <FontAwesomeIcon icon={faComment} className="icon" onClick={handleClick}/>
                     <FontAwesomeIcon icon={faFlag} className="icon"/>
                     {/* <span className="icon">like </span>
                     <span className="icon">comment </span>
@@ -39,6 +60,7 @@ export default function Post(props) {
                     <span className="postDate">{post.time}</span>
                 </div>
             </div>
+            {/* {commentModal && <CommentModal closeModal={setCommentModal} />} */}
         </div>
     </div>
   )

@@ -52,6 +52,7 @@ function NotiItemToMe(props){
         body: JSON.stringify(updateReceiveJSON),
     })
     .then((res) => res.json()).then(() => {
+      props.setPullNotiinfo(false);
       alert('คุณยืนยันเรียบร้อยเเล้ว');
     })
   }
@@ -74,19 +75,31 @@ function NotiItemToMe(props){
         body: JSON.stringify(updateReceiveJSON),
     })
     .then((res) => res.json()).then(() => {
+      props.setPullNotiinfo(false);
       alert('ทำการปฏิเสธเเล้ว');
     })
     
   }
 
-  let update_status = 'waiting'
   return(
 
     <div className='notiitem'>
         <div className='info'>
           <h2 style={{margin:'0'}}>{usernamerequest}</h2>
           <h3 style={{margin:'0'}}>{nameitem}</h3>
-          <h3 style={{margin:'0', color:'#E5529B'}}>{itemtype}</h3>
+          {
+            itemtype === 'sell' &&
+            <h3 style={{margin:'0', color:'#05AB9F'}}>ขาย</h3>
+          }
+          {
+            itemtype === 'give' &&
+            <h3 style={{margin:'0', color:'#E5529B'}}>ให้เปล่า</h3>
+          }
+          {
+            itemtype === 'auction' &&
+            <h3 style={{margin:'0', color:'#956ade9F'}}>ประมูล</h3>
+          }
+
           <div>
             {requeststatus === 'wait' &&
               <div>
@@ -99,10 +112,10 @@ function NotiItemToMe(props){
               </div>
             }
             {requeststatus === 'accept' &&
-              <h3 style={{margin:0}}>ให้คนนี้</h3>
+              <h3 style={{margin:0, color:'#05AB9F'}}>ให้คนนี้</h3>
             }
             {requeststatus === 'reject' &&
-              <h3 style={{margin:0}}>ปฏิเสธ</h3>
+              <h3 style={{margin:0, color:'#E5529B'}}>ปฏิเสธ</h3>
             }
 
           </div>
@@ -121,8 +134,8 @@ function NotiItemToMe(props){
 
 
 function Notification() {
-  const id_local = '6450a7a8eea98b8f59586b44';
-  // const id_local = '644fc1664a26b861c8170394';
+  // const id_local = '6450a7a8eea98b8f59586b44';
+  const id_local = '644fc1664a26b861c8170394';
   const name_local = 'Pun';
   const role_local = '';
   const [pullnotiinfo, setPullNotiinfo] = useState(false);
@@ -183,13 +196,13 @@ function Notification() {
           <div className='noti-contrainer'>
             <div className='noti-left'>
               {historynoti.map((h_noti) =>{
-                return <NotiItemToOhter {...h_noti} key={h_noti._id}/>
+                return <NotiItemToOhter {...h_noti} key={h_noti._id} setPullNotiinfo={setPullNotiinfo} />
               })}
 
             </div>
             <div className='noti-right'>
                {receive.map((receive_item) => {
-                  return <NotiItemToMe {...receive_item} key={receive_item._id}/>
+                  return <NotiItemToMe {...receive_item} key={receive_item._id} setPullNotiinfo={setPullNotiinfo} />
                })}
 
             </div>

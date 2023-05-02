@@ -220,7 +220,7 @@ function DetaiIitem() {
           </div>
 
           <div className='detail-contrainer'>
-            {/* {typeitem == 'bit' &&
+            {/* {typeitem == 'auction' &&
               <div className='color-detail'>
                 <h4 className='change-tag' style={{color:'#DB00FF'}}>ประมูล</h4>
                 <h4 className='change-tag' style={{color:'#E5529B'}}>ราคาปัจจุบัน {price} บาท</h4>
@@ -269,7 +269,7 @@ function DetaiIitem() {
           </div>
           <div className='buttom-group'>
 
-                {detailitemlist.type == 'bit' &&
+                {detailitemlist.type == 'auction' &&
                   <button className='buttom-pass' onClick={handleOpen2}>
                     <h2 style={{margin: 0, fontWeight:300, color:'white'}}>เสนอราคาสินค้า</h2>
                   </button>

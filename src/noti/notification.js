@@ -4,14 +4,38 @@ import sunflower from '../Sunflower.jpg'
 import { useState, useEffect } from 'react'
 
 function NotiItemToOhter(props){
-  const {_id, iduser, nameitem, iditem, usernamepost, useridpost, itemtype, notistatus, time, __v, imageURL} = props;
+  const {_id, iduser, nameitem, iditem, usernamepost, useridpost, itemtype, notistatus, time, __v, imageURL, bitprice} = props;
   // console.log(usernamepost)
   return(
     <div className='notiitem'>
         <div className='info'>
           <h2 style={{margin:'0'}}>{usernamepost}</h2>
           <h3 style={{margin:'0'}}>{nameitem}</h3>
-          <h3 style={{margin:'0', color:'#E5529B'}}>{itemtype}</h3>
+          {/* <h3 style={{margin:'0', color:'#E5529B'}}>{itemtype}</h3> */}
+          {
+            (itemtype === 'auction') &&
+            <div>
+              <h3 style={{margin:'0', color:'#956ade9F'}}>ประมูล</h3>
+              <h3 style={{margin:'0', color:'#956ade9F'}}>{bitprice} บาท</h3>
+            </div>
+          }
+          {
+            (itemtype === 'auction' && notistatus === 'ontop') &&
+              <h3 style={{margin:'0', color:'#05AB9F'}}>เป็นราคาสูงสุด</h3>
+          }
+          {
+            (itemtype === 'auction' && notistatus === 'lose') &&
+              <h3 style={{margin:'0', color:'#DC143C'}}>มีคนให้ราคาสูงกว่า</h3>
+          }
+
+          {
+            itemtype === 'give' &&
+            <h3 style={{margin:'0', color:'#05AB9F'}}>ให้</h3>
+          }
+          {
+            itemtype === 'sell' &&
+            <h3 style={{margin:'0', color:'#E5529B'}}>ขาย</h3>
+          }
           {notistatus === 'accept' &&
             <h3 style={{margin:'0', color:'#05AB9F'}}>ยืนยันเเล้ว</h3>
           }
@@ -32,7 +56,7 @@ function NotiItemToOhter(props){
 }
 
 function NotiItemToMe(props){
-  const {_id, iduser, iditem, nameitem, usernamerequest, useridrequest, itemtype, requeststatus, imageURL, time, __v} = props;
+  const {_id, iduser, iditem, nameitem, usernamerequest, useridrequest, itemtype, requeststatus, imageURL, time, __v, bitprice} = props;
 
   async function summitNotification(){
 
@@ -81,6 +105,22 @@ function NotiItemToMe(props){
     
   }
 
+  async function stopbit(){
+    let stopreciveJSON = {
+      notiid: _id,
+      iditem: iditem
+    }
+    await fetch("http://localhost:3005/stopBit", {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(stopreciveJSON),
+    })
+    props.setPullNotiinfo(false);
+    alert('หยุดการประมูลเเล้ว');
+  }
+
   return(
 
     <div className='notiitem'>
@@ -97,7 +137,7 @@ function NotiItemToMe(props){
           }
           {
             itemtype === 'auction' &&
-            <h3 style={{margin:'0', color:'#956ade9F'}}>ประมูล</h3>
+            <h3 style={{margin:'0', color:'#956ade9F'}}>ประมูลอยู่ที่ {bitprice} บาท {requeststatus === 'done' && <h3 style={{margin:'0', color:'#956ade9F'}}>เสร็จสิ้น</h3>}</h3>
           }
 
           <div>
@@ -117,6 +157,11 @@ function NotiItemToMe(props){
             {requeststatus === 'reject' &&
               <h3 style={{margin:0, color:'#E5529B'}}>ปฏิเสธ</h3>
             }
+            {requeststatus === 'progress' &&
+              <button className='bit-button' onClick={stopbit}>
+                <h3 style={{ margin: 0, fontWeight: 300, color: 'white' }}>หยุดประมูล</h3>
+              </button>
+            }
 
           </div>
           
@@ -134,9 +179,10 @@ function NotiItemToMe(props){
 
 
 function Notification() {
-  // const id_local = '6450a7a8eea98b8f59586b44';
-  const id_local = '644fc1664a26b861c8170394';
-  const name_local = 'Pun';
+  const id_local = '6450a7a8eea98b8f59586b44';
+  // const id_local = '644fc1664a26b861c8170394';
+  // const name_local = 'Pun';
+  const name_local = 'Game poro'
   const role_local = '';
   const [pullnotiinfo, setPullNotiinfo] = useState(false);
   const [historynoti, setHistiryNoti] = useState([]);

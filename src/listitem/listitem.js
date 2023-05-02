@@ -123,6 +123,7 @@ function CoverItem() {
         let local_iduser = '644fc1664a26b861c8170394';
         let local_nameuser = 'Pun';
         let notfillfull = false;
+
         if(fileimg == null){
             notfillfull = true;
         }else if(name.length <= 0){
@@ -172,12 +173,17 @@ function CoverItem() {
                 price: price,
                 iduser: local_iduser,
                 nameuser: local_nameuser,
-                status: 'wait'
+                status: 'wait',
+                bitprice: price,
+                iduserwinbit: 'ยังไม่มีคนสนใจ',
+                nameuserwinbi:''
             }
 
             // const newJSON = JSON.stringify(itemJson)
             // itemForm.append("Json", itemJson)
             console.log(itemJson)
+            let itemreturntype = ''
+            let request = {}
             await fetch("http://localhost:3005/createItem", {
                 method: 'POST',
                 headers: {
@@ -185,13 +191,38 @@ function CoverItem() {
                 },
                 body: JSON.stringify(itemJson),
             })
-            .then((res) => res.json()).then(() => {
-                alert('สร้างสิ่งของสำเร็จ');
-                handleClose();
-
+            .then((res) => res.json()).then((value) => {
+                console.log(value._id)
+                itemreturntype = value.type;
+                if(value.type == 'auction'){
+                        request = {
+                        iduser: value.iduser,
+                        iditem: value._id,
+                        nameitem: value.name,
+                        usernamerequest: 'ยังไม่มีใครสนใจ',
+                        useridrequest: '',
+                        itemtype: value.type,
+                        imageURL: value.imagePath,
+                        bitprice: value.price,
+                        requeststatus:'progress'
+                    }
+                }
+                
             })
-
-
+            console.log(itemreturntype);
+            if(itemreturntype == 'auction'){
+                await fetch("http://localhost:3005/createRequest", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(request),
+                    })
+                    .then((res) => res.json()).then(() => {
+                    }).catch((e) => console.log(e));
+            }
+            alert('สร้างสิ่งของสำเร็จ');
+            handleClose();
         }
 
 

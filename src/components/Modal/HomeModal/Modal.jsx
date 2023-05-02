@@ -24,7 +24,7 @@ function Modal({ closeModal }) {
       desc: desc,
       imgPath: "",
       like: 0,
-      comments: [],
+      // comments: [],
     }
 
     // console.log(JSON.stringify(postJson))
@@ -75,8 +75,8 @@ function Modal({ closeModal }) {
             </div>
           </div>
           <div className="modalFooter">
-            <button style={{backgroundColor:'#b02121', borderRadius:'30px'}} onClick={() => closeModal(false)}>Cancel</button>
-            <button style={{backgroundColor:'#05AB9F', borderRadius:'30px'}} onClick={createPost}>Continue</button>
+            <button style={{backgroundColor:'#b02121', borderRadius:'30px'}} onClick={() => closeModal(false)}>ยกเลิก</button>
+            <button style={{backgroundColor:'#05AB9F', borderRadius:'30px'}} onClick={createPost}>โพส</button>
           </div>
         </div>
     </div>

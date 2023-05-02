@@ -40,15 +40,13 @@ function ProfileModal( props) {
     }
 
   return (
-    <div className="modalBackground">
-        <div className="modalContainer">
-            <div className="titleCloseBtn">
-                <div className="modalTitle">
-                    <h1 style={{marginBottom:'10px'}}>แก้ไขโปรไฟล์</h1>
-                </div>
+    <div className="profileModalBackground">
+        <div className="profileModalContainer">
+            <div className="profileModalTitle">
+                <h1 style={{marginBottom:'10px'}}>แก้ไขโปรไฟล์</h1>
             </div>
-            <hr  className='line2'/>
-            <div className="modalBody">
+            <hr  className='profileLine2'/>
+            <div className="profileModalBody">
                 <div style={{ marginBottom: '2%' }}>
                     <p style={{ margin: '0', marginLeft: '2%' }}>ชื่อ</p>
                     <input type="text" placeholder="Name" style={{ width: '90%', height: '40px', borderRadius: '20px', padding: '2%' }} onChange={inputUsername} value={username} />
@@ -82,7 +80,7 @@ function ProfileModal( props) {
                     <input type="text" placeholder="Line" style={{ width: '90%', height: '40px', borderRadius: '20px', padding: '2%' }} onChange={inputLine} value={line}/>
                 </div>
             </div>
-            <div className="modalFooter">
+            <div className="profileModalFooter">
                 <button id='cancel' onClick={() => props.closeModal(false)}>Cancel</button>
                 <button id='continue'>Continue</button>
             </div>

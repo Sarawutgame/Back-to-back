@@ -1,12 +1,33 @@
 import "./post.css"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faComment, faFlag, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import logo from '../../logo.svg';
+// import CommentModal from "../Modal/CommentModal/CommentModal";
 
 export default function Post(props) {
+    const [currentPost, setCurrentPost] = useState(true);
+    const [random, setRandom] = useState(false);
     // console.log(data);
     const post = props.data
+
+    useEffect(() => {
+        fetch("http://localhost:3005/getPostComment/" + post._id, {
+            method: 'GET',
+        })
+        .then((res) => res.json())
+        .then((value) => {
+            setCurrentPost(value);
+            setRandom(true);
+        })
+    }, [random])
+
+    const handleClick = async () => {
+        // const postSent = post;
+        props.handlePost(currentPost);
+        props.postId(post._id);
+        props.openCommentModal(true);
+    }
   return (
     <div className="post">
         <div className="postWrapper">
@@ -29,7 +50,7 @@ export default function Post(props) {
             <div className="postBottom">
                 <div className="postBottomLeft">
                     <FontAwesomeIcon icon={faHeart} className="icon"/>
-                    <FontAwesomeIcon icon={faComment} className="icon"/>
+                    <FontAwesomeIcon icon={faComment} className="icon" onClick={handleClick}/>
                     <FontAwesomeIcon icon={faFlag} className="icon"/>
                     {/* <span className="icon">like </span>
                     <span className="icon">comment </span>
@@ -39,6 +60,7 @@ export default function Post(props) {
                     <span className="postDate">{post.time}</span>
                 </div>
             </div>
+            {/* {commentModal && <CommentModal closeModal={setCommentModal} />} */}
         </div>
     </div>
   )

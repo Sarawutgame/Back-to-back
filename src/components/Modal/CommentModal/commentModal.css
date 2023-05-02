@@ -1,0 +1,119 @@
+.commentModalBackground{
+    width: 100vw;
+    height: 100vh;
+    /* background-color: transparent; */
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.commentModalContainer {
+    /* margin-top: -80px; */
+    width: 1000px;
+    height: 600px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+}
+
+.commentModalTitle {
+    display: inline-block;
+    text-align: center;
+}
+
+.commentLine2{
+    height:2px;
+    border-width:0;
+    color:gray;
+    width: 90%;
+    background-color:gray;
+    margin-left: 0;
+    margin-top: 0;
+}
+
+.commentLine3{
+    height: 1px;
+    border-width: 0;
+    color: gray;
+    width: 91%;
+    background-color: gray;
+    margin-left: 0;
+    margin-top: 5px;
+}
+
+.commentModalBody {
+    flex: 50%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    font-size: 1.7rem;
+    overflow-y: scroll;
+    /* text-align: center; */
+}
+
+.commentModalFooter {
+    flex: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.commentModalFooter button {
+    width: 100px;
+    height: 30px;
+    margin: 3px;
+    border: none;
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.comment-profile-tag {
+    margin-left: 5%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2%;
+}
+
+.commentButton {
+    display: flex;
+    flex-direction: column;
+}
+
+.commentContainer {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.commentTitle {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-name-tag {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 10px;
+    margin-left: 0;
+    font-size: 18px;
+    align-self: center;
+}
+
+.text {
+    width: 90%;
+    height: 10px;
+    border: none;
+    padding: 2%;
+}
+
+.text:focus {
+    outline: none;
+}

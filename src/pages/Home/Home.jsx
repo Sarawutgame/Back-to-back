@@ -5,23 +5,24 @@ import Modal from "../../components/Modal/HomeModal/Modal"
 import Rightbar from "../../components/Rightbar/Rightbar"
 import Topbar from "../../components/Topbar/Topbar"
 import "./home.css"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 
 export default function Home() {
     const [modal, setModal] = useState(false)
     const [commentModal, setCommentModal] = useState(false)
     const [currentPost, setCurrentPost] = useState([])
-    const [currentId, setCurrentId] = useState();
+    const [currentId, setCurrentId] = useState()
     const handlePost = (post) => {
         setCurrentPost(post)
     }
     const handleId = (id) => {
         setCurrentId(id)
     }
+    
     return (
         <>
-            <Topbar />
+            <Topbar/>
             <div className="homeContainer">
                 <Leftbar openModal={setModal}/>
                 <Feed openCommentModal={setCommentModal} handlePost={handlePost} postId={handleId}/>

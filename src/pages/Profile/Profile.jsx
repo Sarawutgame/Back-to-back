@@ -37,7 +37,7 @@ export default function Profile() {
         <>
             <Topbar />
             <div className="profileContainer">
-                <img src={logo} alt="" className="profileImage"/>
+                <img src={user.imageuserpath} alt="" className="profileImage"/>
                 <span>Name</span>
                 <div className="inputContainer">
                     <span className="profileTitle">ชื่อ</span>

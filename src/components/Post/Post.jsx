@@ -33,9 +33,9 @@ export default function Post(props) {
         <div className="postWrapper">
             <div className="postTop">
                 <div className="postTopLeft">
-                    <img className="postProfileImg" src={logo} alt="" />
+                    <img className="postProfileImg" src="https://postimagebucket.s3.amazonaws.com/e3fa12a0-77c0-48d0-ad6c-26771ee872bf.jpg" alt="" />
                     <div className="postInfo">
-                        <span className="postUsername">user</span>
+                        <span className="postUsername">{post.username}</span>
                         <span className="postType">{post.type}</span>
                     </div>
                 </div>
@@ -45,7 +45,7 @@ export default function Post(props) {
             </div>
             <div className="postCenter">
                 <span className="postText">{post.desc}</span>
-                <img src={logo} alt="" className="postImg" />
+                <img src={post.imgPath} alt="" className="postImg" style={{backgroundColor: "black"}}/>
             </div>
             <div className="postBottom">
                 <div className="postBottomLeft">

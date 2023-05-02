@@ -27,8 +27,8 @@ export default function Topbar() {
         </div>
         <div className="topbarRight">
             <div className="topbarProfile">
-                <span className="name">user</span>
-                <img src={logo} alt="" className="profileImg" onClick={()=>navigate('/profile')}/>
+                <span className="name">Pun</span>
+                <img src="https://postimagebucket.s3.amazonaws.com/e3fa12a0-77c0-48d0-ad6c-26771ee872bf.jpg" alt="" className="profileImg" onClick={()=>navigate('/profile')}/>
             </div>
         </div>
     </div>

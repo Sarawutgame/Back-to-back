@@ -9,7 +9,7 @@
 }
 
 .commentModalContainer {
-    /* margin-top: -80px; */
+    margin-top: -80px;
     width: 1000px;
     height: 600px;
     border-radius: 12px;
@@ -80,9 +80,12 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 2%;
+    width: 50%
 }
 
 .commentButton {
+    align-items: center;
+    justify-content: center;
     display: flex;
     flex-direction: column;
 }

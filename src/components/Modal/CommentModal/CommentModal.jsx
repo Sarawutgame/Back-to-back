@@ -49,7 +49,7 @@ function CommentModal( props ) {
             <div className="commentModalFooter">
                 <div className='comment-profile-tag'>
                     <img src='https://postimagebucket.s3.amazonaws.com/0da84249-715f-4aa9-8990-ce47ce976d55.jpg' className='image-profile' alt='profile'/>
-                    <input type="text" placeholder="Comment" style={{ width: '90%', height: '40px', borderRadius: '20px', padding: '2%' }} onChange={inputText} value={text}/>
+                    <input type="text" placeholder="Comment" style={{ width: '90%', height: '40px', borderRadius: '20px', padding: '2%', top: "15px", position: "relative", marginRight: "5px" }} onChange={inputText} value={text}/>
                     {/* <h4 className='name-tag'>Game Proo</h4> */}
                 </div>
                 <div className="commentButton">

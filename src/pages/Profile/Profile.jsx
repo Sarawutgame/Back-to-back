@@ -67,9 +67,15 @@ export default function Profile() {
                     <div className="profileLink">
                         <span>ช่องทางการติดต่อ</span>
                         <div className="social">
-                            <span>IG: {user.ig} </span>
-                            <span>FB: {user.fb} </span>
-                            <span>Twit: {user.twit} </span>
+                            <div>
+                                <span>IG: </span>
+                                <a style={{"text-decoration": "none", color: "black"}} href={'https://www.instagram.com/' + user.ig}>{user.ig}</a>
+                            </div>
+                                <span>FB: {user.fb}</span>
+                            <div>
+                                <span>Twit: </span>
+                                <a style={{"text-decoration": "none", color: "black"}} href={'https://www.twitter.com/' + user.twit}>{user.twit}</a>
+                            </div>
                             <span>Line: {user.line} </span>
                         </div>
                     </div>
@@ -82,7 +88,7 @@ export default function Profile() {
                     <button className="button" onClick={() => setModal(true)}>แก้ไข</button>
                     <button className="button" onClick={handleOnLogout}>ออกจากระบบ</button>
                 </div>
-                {modal && <ProfileModal closeModal={setModal} user={user}/>}
+                {modal && <ProfileModal closeModal={setModal} user={user} setBool={setRandom}/>}
             </div>
         </>
     )

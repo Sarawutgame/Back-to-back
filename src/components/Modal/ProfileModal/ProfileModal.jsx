@@ -39,6 +39,32 @@ function ProfileModal( props) {
         setLine(event.target.value);
     }
 
+    const handleEdit = async () => {
+        const updatedUser = {
+            username: username,
+            email: email,
+            phone: phone,
+            faculty: faculty,
+            ig: ig,
+            fb: fb,
+            twit: twit,
+            line: line
+        }
+
+        await fetch('http://localhost:3005/updateUser/' + user._id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedUser)
+        })
+        .then((res) => {
+            res.json()
+            props.closeModal(false)
+            props.setBool(false)
+        })
+    }
+
   return (
     <div className="profileModalBackground">
         <div className="profileModalContainer">
@@ -82,7 +108,7 @@ function ProfileModal( props) {
             </div>
             <div className="profileModalFooter">
                 <button id='cancel' onClick={() => props.closeModal(false)}>Cancel</button>
-                <button id='continue'>Continue</button>
+                <button id='continue' onClick={handleEdit}>Continue</button>
             </div>
         </div>
     </div>

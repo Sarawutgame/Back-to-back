@@ -262,7 +262,7 @@ function CoverItem() {
     return (
         <>
         <Topbar />
-        <div className="contrainer">
+        <div className="contrainer-allitem">
             <div className='div1'>
                 <h1 style={{ marginBottom: '0', marginLeft: "3%" }}>รายการสิ่งของ</h1>
                 <FormControl sx={{ m: 2, minWidth: 200 }} size="small">

@@ -260,7 +260,7 @@ function DetaiIitem() {
 
 
   return (
-    <div className="contrainer">
+    <div className="contrainer-detail">
       <div className='inner-contrainer'>
           <div className='header-image'>
             <img src={detailitemlist.imagePath} className='image-head' alt='logo'/>

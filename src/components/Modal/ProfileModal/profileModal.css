@@ -48,7 +48,8 @@
 }
 
 .profileModalFooter {
-    flex: 20%;
+    /* flex: 20%; */
+    margin-top: 5%;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -4,6 +4,7 @@ import logo from "../../logo.svg"
 import Topbar from "../../components/Topbar/Topbar"
 // import { Modal } from "@mui/material";
 import ProfileModal from "../../components/Modal/ProfileModal/ProfileModal";
+import { useLocation } from "react-router-dom";
 
 // import Box from "@mui/material";
 // import Typography from "@mui/material";
@@ -11,16 +12,18 @@ import ProfileModal from "../../components/Modal/ProfileModal/ProfileModal";
 // import Backdrop from '@mui/material/Backdrop';
 
 export default function Profile() {
+    const location = useLocation();
     const [user, setUser] = useState([]);
     const [random, setRandom] = useState(false);
     const [modal, setModal] = useState(false);
+    const id = location.state?.userid;
 
     // const userJson = {
     //     "userId": "644fc1664a26b861c8170394"
     // }
 
     useEffect(() => {
-        fetch("http://localhost:3005/userById/644fc1664a26b861c8170394", {
+        fetch("http://localhost:3005/userById/" + id, {
             method: 'GET',
         })
         .then((res) => res.json())

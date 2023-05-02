@@ -1,6 +1,7 @@
 import logo from '../logo.svg'
 import './detailitem.css'
 import sunflower from '../Sunflower.jpg'
+import { useLocation, useNavigate } from "react-router-dom";
 
 import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
@@ -23,6 +24,11 @@ import { useEffect, useState } from 'react';
 
 
 function DetaiIitem() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const itemid = location.state?._id;
+  const userid = location.state?.iduser;
   const [telltype, setTelltype] = useState('สิ่งของ')
   const [pulldetail, setPullDetail] = useState(false);
     // let allitem = []
@@ -61,13 +67,13 @@ function DetaiIitem() {
     __v:'',
     imageuserpath:'https://postimagebucket.s3.amazonaws.com/e3fa12a0-77c0-48d0-ad6c-26771ee872bf.jpg',
   })
-  const id_props = '6450fa7d2c7253e0afd388bc';
-  const userid_props = '644fc1664a26b861c8170394';
+  const id_props = itemid;
+  const userid_props = userid;
   const tag = ['อุปกรณ์การเรียน', 'ดอกไม้'];
 
   //USER
-  const id_local = '6450a7a8eea98b8f59586b44';
-  const name_local = 'Game Poro';
+  const id_local = user._id;
+  const name_local = user.username;
 
 
   useEffect(() => {
@@ -258,6 +264,10 @@ function DetaiIitem() {
     }
   }
 
+  const handleClick = () => {
+    navigate("/profile", { state: {userid}})
+  }
+
 
   return (
     <div className="contrainer">
@@ -345,7 +355,7 @@ function DetaiIitem() {
 
             
             <button className='buttom-pass'>
-                <h2 style={{margin: 0, fontWeight:300, color:'white'}}>โปรไฟล์เจ้าของ</h2>
+                <h2 style={{margin: 0, fontWeight:300, color:'white'}} onClick={handleClick}>โปรไฟล์เจ้าของ</h2>
             </button>
           </div>
       </div>

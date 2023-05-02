@@ -16,6 +16,7 @@ import Fade from '@mui/material/Fade';
 import Topbar from '../components/Topbar/Topbar';
 // import axios from 'axios';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -23,6 +24,7 @@ import { useEffect } from 'react';
 
 
 function Item(props) {
+    const navigate = useNavigate();
     // const [file, setFile] = useState();
     // function handleImg(e) {
         
@@ -31,13 +33,17 @@ function Item(props) {
     // }
     // const { id, itemname, image, itemtype, dateend, price } = props;
 
-    const {_id, type, tag, price, name, imagePath, desc, daytime, __v} = props;
+    const {_id, type, tag, price, name, imagePath, desc, daytime, __v, iduser} = props;
     // console.log(id, image);
     // console.log(itemtype === 'bit')
     let dateend = '01/01/2023';
+
+    const handleClick = () => {
+        navigate("/detailitem", { state: {_id, iduser}})
+    }
     return (
         <div className='card-item'>
-            <img src={imagePath} className="item-image" alt="logo" />
+            <img src={imagePath} className="item-image" alt="logo" onClick={handleClick}/>
             <div className='card-text'>
                 <p style={{ margin: '0', fontSize: 14 }}>{name}</p>
                 <div style={{ margin: '0', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>

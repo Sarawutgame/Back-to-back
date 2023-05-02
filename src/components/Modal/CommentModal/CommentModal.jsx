@@ -5,6 +5,7 @@ function CommentModal( props ) {
     const [text, setText] = useState("");
     const [comments, setComments] = useState(props.post)
     const [id, setId] = useState(props.postId)
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const inputText = (event) => {
         setText(event.target.value);
@@ -16,10 +17,10 @@ function CommentModal( props ) {
     async function createComment(){
         const commentJson = {
             postId: id,
-            userId: "644fc1664a26b861c8170394",
-            username: "Game",
+            userId: user._id,
+            username: user.username,
             text: text,
-            imgPath: ""
+            imgPath: user.imageuserpath
         }
 
 
@@ -48,7 +49,7 @@ function CommentModal( props ) {
             </div>
             <div className="commentModalFooter">
                 <div className='comment-profile-tag'>
-                    <img src='https://postimagebucket.s3.amazonaws.com/0da84249-715f-4aa9-8990-ce47ce976d55.jpg' className='image-profile' alt='profile'/>
+                    <img src={user.imageuserpath} className='image-profile' alt='profile'/>
                     <input type="text" placeholder="Comment" style={{ width: '90%', height: '40px', borderRadius: '20px', padding: '2%', top: "15px", position: "relative", marginRight: "5px" }} onChange={inputText} value={text}/>
                     {/* <h4 className='name-tag'>Game Proo</h4> */}
                 </div>
@@ -65,11 +66,12 @@ function CommentModal( props ) {
 function Comment(props) {
     const [comment, setComment] = useState(props.data);
     // console.log();
+    console.log(comment);
     
     return(
         <div className='commentContainer'>
             <div className="commentTitle">
-                <img src='https://postimagebucket.s3.amazonaws.com/0da84249-715f-4aa9-8990-ce47ce976d55.jpg' className='image-profile' alt='profile'/>
+                <img src={comment.imgPath} className='image-profile' alt='profile'/>
                 <p className='comment-name-tag'>{comment.username}</p>
             </div>
             <hr className='commentLine3'/>

@@ -1,11 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
+
+*{
+    box-sizing: border-box;
+    font-family: 'Noto Sans Thai', sans-serif;
+}
+
 .container-ad{
-  background-color: whitesmoke;
+  background-color: rgb(235, 235, 235);
   width: 1598px;
-  height: 942px;
+  min-height: 942px;
   display: flex;
   /* justify-content: center; */
   /* align-items: center; */
-  border-radius: 10px;
+  border-radius: 50px;
   margin: auto;
   margin-top: 15px;
 }
@@ -39,7 +46,7 @@
   width: 100%;
   margin-top: 50px;
   margin-left: 0px ;
-  background-color: #F6F6F6;
+  background-color: rgb(235, 235, 235);
   border-radius: px;
   border: none;
 }
@@ -54,11 +61,11 @@ td {
 }
 
 .Ban-ad {
-  border-radius: 15px;
-  width: 70px;
-  height: 25px;
+  border-radius: 30px;
+  width: 100px;
+  height: 50px;
   border: none;
-  background-color: rgb(216, 160, 160);
+  background-color: rgb(233, 79, 79);
 }
 .normal-ad {
   border-radius: 15px;

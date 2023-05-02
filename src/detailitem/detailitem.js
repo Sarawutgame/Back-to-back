@@ -61,7 +61,7 @@ function DetaiIitem() {
     __v:'',
     imageuserpath:'https://postimagebucket.s3.amazonaws.com/e3fa12a0-77c0-48d0-ad6c-26771ee872bf.jpg',
   })
-  const id_props = '6450fa7d2c7253e0afd388bc';
+  const id_props = '64512fbcdb610399a939f539';
   const userid_props = '644fc1664a26b861c8170394';
   const tag = ['อุปกรณ์การเรียน', 'ดอกไม้'];
 
@@ -268,12 +268,12 @@ function DetaiIitem() {
 
           <div className='name-contrainer'>
             <h2 className='name-item'>{detailitemlist.name}</h2>
-            <div className='group-tag'>
+            {/* <div className='group-tag'>
                 {tag.map((tag_item) =>{
                     return <h4 className='tag-item' key={tag_item}>#{tag_item}</h4>
                 })}
                 
-            </div>
+            </div> */}
           </div>
 
           <div className='detail-contrainer'>
@@ -312,7 +312,7 @@ function DetaiIitem() {
           <div className='profile-tag'>
             <img src={userDetail.imageuserpath} className='image-profile' alt='profile'/>
             <h4 className='name-tag'>{userDetail.username}</h4>
-            <p className='give-tag'>จำนวนการให้ {userDetail.faculty}</p>
+            {/* <p className='give-tag'>จำนวนการให้ {userDetail.faculty}</p> */}
           </div>
           <div className='line-contrainer'>
             <hr className='line'/>

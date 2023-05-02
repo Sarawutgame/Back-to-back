@@ -130,6 +130,7 @@ body{
     display: flex;
     flex-direction: row;
     margin-bottom: 0px;
+    margin-bottom: 5px;
 }
 
 .image-profile{

@@ -113,7 +113,7 @@ function CoverItem() {
     }
 
     useEffect(() => {
-        fetch("http://localhost:3005/allitem", {
+        fetch("http://52.201.71.227:3005/allitem", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -168,7 +168,7 @@ function CoverItem() {
             fromData.append('avatar', fileimg);
             console.log(file)
 
-            await fetch("http://localhost:3005/upload", {
+            await fetch("http://52.201.71.227:3005/upload", {
                 method: 'POST',
                 body: fromData,
             })
@@ -202,7 +202,7 @@ function CoverItem() {
             console.log(itemJson)
             let itemreturntype = ''
             let request = {}
-            await fetch("http://localhost:3005/createItem", {
+            await fetch("http://52.201.71.227:3005/createItem", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -229,7 +229,7 @@ function CoverItem() {
             })
             console.log(itemreturntype);
             if(itemreturntype == 'auction'){
-                await fetch("http://localhost:3005/createRequest", {
+                await fetch("http://52.201.71.227:3005/createRequest", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

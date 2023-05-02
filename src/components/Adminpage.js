@@ -18,7 +18,7 @@ function AdminPage() {
     const [pullReport, setPullReport] = useState(false);
 
     useEffect(() => {
-        fetch("http://localhost:3005/getReport", {
+        fetch("http://52.201.71.227:3005/getReport", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ function AdminPage() {
             iditem: item.iditem,
           }
       
-        await fetch("http://localhost:3005/Banitem", {
+        await fetch("http://52.201.71.227:3005/Banitem", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

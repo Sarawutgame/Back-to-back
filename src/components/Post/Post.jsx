@@ -28,19 +28,36 @@ export default function Post(props) {
         props.postId(post._id);
         props.openCommentModal(true);
     }
+
+    const addLike = async () => {
+        const likeJson = {
+            like: post.like + 1,
+        }
+        await fetch("http://localhost:3005/posts/" + post._id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(likeJson)
+        })
+        .then((res) => {
+            res.json()
+            // console.log(res.json());
+        })
+    }
   return (
     <div className="post">
         <div className="postWrapper">
             <div className="postTop">
                 <div className="postTopLeft">
-                    <img className="postProfileImg" src="https://postimagebucket.s3.amazonaws.com/e3fa12a0-77c0-48d0-ad6c-26771ee872bf.jpg" alt="" />
+                    <img className="postProfileImg" src={post.imageuserpath} alt="" />
                     <div className="postInfo">
                         <span className="postUsername">{post.username}</span>
                         <span className="postType">{post.type}</span>
                     </div>
                 </div>
                 <div className="postTopRight">
-                    <FontAwesomeIcon icon={faPenToSquare} className="icon" />
+                    {/* <FontAwesomeIcon icon={faPenToSquare} className="icon" /> */}
                 </div>
             </div>
             <div className="postCenter">
@@ -49,9 +66,9 @@ export default function Post(props) {
             </div>
             <div className="postBottom">
                 <div className="postBottomLeft">
-                    <FontAwesomeIcon icon={faHeart} className="icon"/>
+                    <FontAwesomeIcon icon={faHeart} className="icon" onClick={addLike}/>{post.like}
                     <FontAwesomeIcon icon={faComment} className="icon" onClick={handleClick}/>
-                    <FontAwesomeIcon icon={faFlag} className="icon"/>
+                    {/* <FontAwesomeIcon icon={faFlag} className="icon"/> */}
                     {/* <span className="icon">like </span>
                     <span className="icon">comment </span>
                     <span className="icon">report</span> */}

@@ -9,6 +9,7 @@ import Select from '@mui/material/Select';
 function Modal({ closeModal }) {
   const [typeInItem, settypeInItem] = React.useState('');
   const [desc, setDesc] = useState('');
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleInChange = (event) => {
     settypeInItem(event.target.value);
@@ -22,11 +23,7 @@ function Modal({ closeModal }) {
   const [imgPath, setImgPath] = useState();
   const [pullitem, setPullItem] = useState(false);
 
-  async function createPost(){
-    let local_iduser = '644fc1664a26b861c8170394';
-    let local_nameuser = 'Pun';
-
-    
+  async function createPost(){    
 
     let imageURLS3 = '';
     const fromData = new FormData();
@@ -49,12 +46,13 @@ function Modal({ closeModal }) {
 
 
     const postJson = {
-      userId: "64506e225e0bfe6563a9d81a",
-      username: "Pun",
+      userId: user._id,
+      username: user.username,
       type: typeInItem,
       desc: desc,
       imgPath: imageURLS3,
       like: 0,
+      imageuserpath: user.imageuserpath
       // comments: [],
     }
     // console.log(JSON.stringify(postJson))
@@ -87,8 +85,8 @@ function Modal({ closeModal }) {
           <hr className='line2' />
           <div className="modalBody">
             <div className='profile-tag'>
-              <img src='https://postimagebucket.s3.amazonaws.com/e3fa12a0-77c0-48d0-ad6c-26771ee872bf.jpg' className='image-profile' alt='profile'/>
-              <h4 className='name-tag'>Pun</h4>
+              <img src={user.imageuserpath} className='image-profile' alt='profile'/>
+              <h4 className='name-tag'>{user.username}</h4>
             </div>
             <div style={{ marginBottom: '2%' }}>
             <div style={{ marginBottom: '2%' }}>

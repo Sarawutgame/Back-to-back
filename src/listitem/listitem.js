@@ -37,6 +37,7 @@ function Item(props) {
     // console.log(id, image);
     // console.log(itemtype === 'bit')
     let dateend = '01/01/2023';
+    console.log(iduser);
 
     const handleClick = () => {
         navigate("/detailitem", { state: {_id, iduser}})
@@ -84,7 +85,7 @@ function CoverItem() {
     // let allitem = []
     const [allitem, setAllItem] = useState([]);
     var showitem = [];
-    let mapitem = [];
+    // let mapitem = [];
 
     const [file, setFile] = useState();
     const [fileimg, setfileimg] = useState();
@@ -121,25 +122,29 @@ function CoverItem() {
         })
         .then((res) => res.json())
         .then((value) => {
-            setAllItem(value)
+            showitem = value.filter(el => el.status !== 'complete');
+            showitem = JSON.stringify(showitem);
+            showitem = JSON.parse(showitem);
+            setAllItem(showitem)
             // allitem=value;
             console.log(allitem);
             setPullItem(true)
             })
-        showitem = allitem.filter(el => el.status !== 'complete');
-        mapitem = showitem.map(function (per){
-            return per.status;
-        });
+        
+        // showitem = allitem.filter(el => el.status !== 'complete').map(el => {
+        //     // return {_id, type, tag, price, name, imagePath, desc, daytime, __v, iduser};
+        // });
 
-        console.log('fillter'+ showitem)
+        console.log(showitem)
         //Runs only on the first render
       }, [pullitem]);
 
 
 
     async function UploadimageToNode(){
-        let local_iduser = user.id;
-        let local_nameuser = user.name;
+        let local_iduser = user._id;
+        console.log(user.id);
+        let local_nameuser = user.username;
         let notfillfull = false;
 
         if(fileimg == null){

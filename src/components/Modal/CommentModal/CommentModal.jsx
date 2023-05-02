@@ -32,6 +32,7 @@ function CommentModal( props ) {
             body: JSON.stringify(commentJson)
         })
         .then((res) => res.json())
+        alert('สร้าง Comment เเล้ว')
     }
 
   return (

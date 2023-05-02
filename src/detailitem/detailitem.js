@@ -17,6 +17,7 @@ import Fade from '@mui/material/Fade';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faComment, faFlag, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react';
+import Topbar from '../components/Topbar/Topbar';
 
 
 
@@ -29,6 +30,7 @@ function DetaiIitem() {
   const user = JSON.parse(localStorage.getItem("user"));
   const itemid = location.state?._id;
   const userid = location.state?.iduser;
+  console.log(userid);
   const [telltype, setTelltype] = useState('สิ่งของ')
   const [pulldetail, setPullDetail] = useState(false);
     // let allitem = []
@@ -270,6 +272,8 @@ function DetaiIitem() {
 
 
   return (
+    <>
+    <Topbar />
     <div className="contrainer-detail">
       <div className='inner-contrainer'>
           <div className='header-image'>
@@ -460,6 +464,7 @@ function DetaiIitem() {
       </div>
 
     </div>
+    </>
   );
 }
 

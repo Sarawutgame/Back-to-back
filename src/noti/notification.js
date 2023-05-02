@@ -2,6 +2,7 @@ import logo from '../logo.svg'
 import './notification.css'
 import sunflower from '../Sunflower.jpg'
 import { useState, useEffect } from 'react'
+import Topbar from '../components/Topbar/Topbar'
 
 function NotiItemToOhter(props){
   const {_id, iduser, nameitem, iditem, usernamepost, useridpost, itemtype, notistatus, time, __v, imageURL, bitprice} = props;
@@ -222,6 +223,8 @@ function Notification() {
   }, [pullnotiinfo]);
 
   return (
+    <>
+    <Topbar />
     <div className="contrainer">
       <div className='inner-contrainer'>
           <div className='header'>
@@ -256,6 +259,7 @@ function Notification() {
           </div>
       </div>
     </div>
+    </>
   );
 }
 

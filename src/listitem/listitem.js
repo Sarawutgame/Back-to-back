@@ -78,11 +78,13 @@ function Item(props) {
 
 
 function CoverItem() {
+    const user = JSON.parse(localStorage.getItem("user"));
     // let pullitem = false
     const [pullitem, setPullItem] = useState(false);
     // let allitem = []
     const [allitem, setAllItem] = useState([]);
-    
+    var showitem = [];
+    let mapitem = [];
 
     const [file, setFile] = useState();
     const [fileimg, setfileimg] = useState();
@@ -106,6 +108,10 @@ function CoverItem() {
         setPrice(event.target.value);
     }
 
+    function fillterfunct(item){
+        return item.status != 'complete' || item.status != 'pending'
+    }
+
     useEffect(() => {
         fetch("http://localhost:3005/allitem", {
             method: 'GET',
@@ -120,14 +126,20 @@ function CoverItem() {
             console.log(allitem);
             setPullItem(true)
             })
+        showitem = allitem.filter(el => el.status !== 'complete');
+        mapitem = showitem.map(function (per){
+            return per.status;
+        });
+
+        console.log('fillter'+ showitem)
         //Runs only on the first render
       }, [pullitem]);
 
 
 
     async function UploadimageToNode(){
-        let local_iduser = '644fc1664a26b861c8170394';
-        let local_nameuser = 'Pun';
+        let local_iduser = user.id;
+        let local_nameuser = user.name;
         let notfillfull = false;
 
         if(fileimg == null){

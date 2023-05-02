@@ -63,7 +63,10 @@ function Modal({ closeModal }) {
       },
       body: JSON.stringify(postJson)
     })
-    .then((res) => res.json());
+    .then((res) => {
+      alert('โพสเรียบร้อย')
+      res.json()
+    });
   }
 
   function handleImg(e) {

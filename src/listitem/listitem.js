@@ -1,6 +1,6 @@
 import './listitem.css';
 
-import sunflower from '../Sunflower.jpg'
+// import sunflower from '../Sunflower.jpg'
 // import logo from '../logo.svg';
 import React, {useState} from 'react';
 import InputLabel from '@mui/material/InputLabel';

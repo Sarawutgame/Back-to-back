@@ -38,6 +38,13 @@ function DetaiIitem() {
     status:'',
     _id:'',
     __v:'',
+    bitprice:'',
+    iduserwinbit:'',
+    ban:'',
+    daytime:''
+
+
+
   });
 
   const [userDetail, setuserDetail]= useState({
@@ -54,7 +61,7 @@ function DetaiIitem() {
     __v:'',
     imageuserpath:'https://postimagebucket.s3.amazonaws.com/e3fa12a0-77c0-48d0-ad6c-26771ee872bf.jpg',
   })
-  const id_props = '644ff89d243d6fbd79f0733e';
+  const id_props = '6450fa7d2c7253e0afd388bc';
   const userid_props = '644fc1664a26b861c8170394';
   const tag = ['อุปกรณ์การเรียน', 'ดอกไม้'];
 
@@ -121,7 +128,8 @@ function DetaiIitem() {
       usernamepost: userDetail.username,
       useridpost: userDetail._id,
       itemtype: detailitemlist.type,
-      imageURL:detailitemlist.imagePath
+      imageURL:detailitemlist.imagePath,
+      bitprice: '0',
     }
     await fetch("http://localhost:3005/createNoti", {
       method: 'POST',
@@ -140,7 +148,8 @@ function DetaiIitem() {
       usernamerequest:name_local,
       useridrequest:id_local,
       itemtype:detailitemlist.type,
-      imageURL:detailitemlist.imagePath
+      imageURL:detailitemlist.imagePath,
+      bitPrice:'0',
     }
     await fetch("http://localhost:3005/createRequest", {
       method: 'POST',
@@ -191,15 +200,63 @@ function DetaiIitem() {
     }
   }
 
-  // function summitBit(){
-  //   if(bitPrice / price >= 1.05){
-  //     alert('เพิ่มราคาสำเร็จเเล้ว');
-  //     handleClose2();
-  //   }
-  //   else{
-  //     alert('โปรดใส่ราคาให้มากกว่า 5% ของราคาสินค้า');
-  //   }
-  // }
+  async function summitBit(){
+    if(bitPrice / detailitemlist.bitprice >= 1.05){
+      let notiJson = {
+        iduser: id_local,
+        nameitem: detailitemlist.name,
+        iditem: detailitemlist._id,
+        usernamepost: userDetail.username,
+        useridpost: userDetail._id,
+        itemtype: detailitemlist.type,
+        imageURL:detailitemlist.imagePath,
+        notistatus:'ontop',
+        bitprice: bitPrice,
+      }
+
+      let updateNoti = {
+        useridpost: userDetail._id,
+        iditem:detailitemlist._id,
+        bitprice:bitPrice,
+        usernamerequest:name_local,
+        useridrequest:id_local
+      }
+
+      await fetch("http://localhost:3005/updateBit", {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateNoti),
+      }).then((res) => res.json()).then(() => {
+        console.log('UpdateNoti')
+      }).catch((e) => console.log(e));
+
+      await fetch("http://localhost:3005/createNoti", {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(notiJson),
+      })
+      .then((res) => res.json()).then(() => {
+        alert('เพิ่มราคาสำเร็จเเล้ว');
+        setPullDetail(false);
+      }).catch((e) => console.log(e));
+
+      
+
+
+      handleClose2();
+
+
+
+
+    }
+    else{
+      alert('โปรดใส่ราคาให้มากกว่า 5% ของราคาสินค้า');
+    }
+  }
 
 
   return (
@@ -220,14 +277,13 @@ function DetaiIitem() {
           </div>
 
           <div className='detail-contrainer'>
-            {/* {typeitem == 'auction' &&
+            {detailitemlist.type == 'auction' &&
               <div className='color-detail'>
                 <h4 className='change-tag' style={{color:'#DB00FF'}}>ประมูล</h4>
-                <h4 className='change-tag' style={{color:'#E5529B'}}>ราคาปัจจุบัน {price} บาท</h4>
-                <h4 className='change-tag' style={{color:'#C7C8C7'}}>ราคาเริ่มต้น {start_price} บาท</h4>
-                <h4 className='change-tag' style={{color:'#E0352D'}}>หมดวันที่ {end_date}</h4>
+                <h4 className='change-tag' style={{color:'#E5529B'}}>ราคาปัจจุบัน {detailitemlist.bitprice} บาท</h4>
+                <h4 className='change-tag' style={{color:'#C7C8C7'}}>ราคาเริ่มต้น {detailitemlist.price} บาท</h4>
               </div>
-            } */}
+            }
             {detailitemlist.type == 'sell' &&
               <div className='color-detail'>
                 <h4 className='change-tag' style={{color:'#05AB9F'}}>ขาย</h4>
@@ -366,15 +422,15 @@ function DetaiIitem() {
                             <div className='box-over'>
                                 <div style={{marginBottom:'2%'}}>
                                     <h3 style={{margin:'0', marginLeft:'2%'}}>ชื่อ</h3>
-                                    <input type="text" placeholder="Name" style={{width:'90%', height:'40px', borderRadius:'20px',padding:'2%'}} readOnly/>
+                                    <input type="text" placeholder="Name" style={{width:'90%', height:'40px', borderRadius:'20px',padding:'2%'}} readOnly value={detailitemlist.name}/>
                                 </div>
                                 <div style={{marginBottom:'2%'}}>
                                     <h3 style={{margin:'0', marginLeft:'2%'}}>ราคาปัจจุบัน</h3>
-                                    <input type="number" placeholder="Name" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}} value={detailitemlist.price} readOnly/>
+                                    <input type="number" placeholder="Name" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}} value={detailitemlist.bitprice} readOnly/>
                                 </div>
                                 <div style={{marginBottom:'2%'}}>
                                     <h3 style={{margin:'0', marginLeft:'2%'}}>ราคา</h3>
-                                    <input type="number" placeholder="Name" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}} value={bitPrice} onChange={InputPriceBit}/>
+                                    <input type="number" placeholder="ใส่ราคาได้เลย" style={{width:'50%', height:'40px', borderRadius:'20px',padding:'2%'}} value={bitPrice} onChange={InputPriceBit}/>
                                 </div>
                                 <div style={{marginBottom:'2%'}}>
                                     <h3 style={{margin:'0', marginLeft:'2%'}}>*ราคาประมูลต้องมากกว่าราคาสินค้า ณ ปัจจุบัน</h3>
@@ -383,7 +439,7 @@ function DetaiIitem() {
                         </form>
                         <div className='button-con'>
                             {/* อย่าลืมใส่ onclick summitbit */}
-                            <button className='button-summit'>
+                            <button className='button-summit' onClick={summitBit}>
                                 <h2 style={{margin: 0, fontWeight:300, color:'white'}}>ประมูล</h2>
                             </button>
                         </div>

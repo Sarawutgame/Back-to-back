@@ -137,3 +137,14 @@ body{
     border:0px;
     cursor: pointer;
 }
+
+.bit-button{
+    width: 100px;
+    height: 40px;
+    border-radius: 30px;
+    border-color: #F9F9F9;
+    background-color: #a83bdb;
+    border:0px;
+    margin-right: 10px;
+    cursor: pointer;
+}

@@ -270,7 +270,7 @@ function DetaiIitem() {
 
 
   return (
-    <div className="contrainer">
+    <div className="contrainer-detail">
       <div className='inner-contrainer'>
           <div className='header-image'>
             <img src={detailitemlist.imagePath} className='image-head' alt='logo'/>
@@ -278,12 +278,12 @@ function DetaiIitem() {
 
           <div className='name-contrainer'>
             <h2 className='name-item'>{detailitemlist.name}</h2>
-            <div className='group-tag'>
+            {/* <div className='group-tag'>
                 {tag.map((tag_item) =>{
                     return <h4 className='tag-item' key={tag_item}>#{tag_item}</h4>
                 })}
                 
-            </div>
+            </div> */}
           </div>
 
           <div className='detail-contrainer'>
@@ -322,7 +322,7 @@ function DetaiIitem() {
           <div className='profile-tag'>
             <img src={userDetail.imageuserpath} className='image-profile' alt='profile'/>
             <h4 className='name-tag'>{userDetail.username}</h4>
-            <p className='give-tag'>จำนวนการให้ {userDetail.faculty}</p>
+            {/* <p className='give-tag'>จำนวนการให้ {userDetail.faculty}</p> */}
           </div>
           <div className='line-contrainer'>
             <hr className='line'/>

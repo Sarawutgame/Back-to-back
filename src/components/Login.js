@@ -56,8 +56,12 @@ function Login() {
       };
 
     return (
-        <div className="container">
-            <form className="Login-form">
+        <div className="container-login">
+            
+            <div className="Login-form">
+                <div>
+                    <img src='https://postimagebucket.s3.amazonaws.com/146423392-business-to-business-icon-design-concept-removebg-preview.png'></img>
+                </div>
                 <div>
                 <p className='label-text'>อีเมล</p>
                 <input className='text-input' type="email" id="email" name="email" value={id} onChange={inputId}></input>
@@ -65,14 +69,12 @@ function Login() {
                 <input className='text-input' type="password" placeholder="" id="password" name="password" value={password} onChange={inputPassword}></input>
                 
                 </div>
-                <button className="button-login" onClick={handleOnLogin}>เข้าสู่ระบบ</button>
-                
-                
-
-                
-            </form>
-            <div>
-                <h4>ยังไม่มีบัญชีสมัครได้เลย</h4>
+                    <button className="button-login" onClick={() => alert('FS')}>เข้าสู่ระบบ</button>
+                <div>
+                    <button style={{backgroundColor:'rgba(0, 0, 255, 0)', border:'0px'}} onClick={() => alert('GG')}>
+                        <h4 style={{fontSize:'20px', textDecoration:'underline'}}>ยังไม่มีบัญชีสมัครได้เลย</h4>
+                    </button>
+                </div>
             </div>
             {/* <button>ยังไม่มีบัญชีสมัครได้เลย</button> */}
         </div>

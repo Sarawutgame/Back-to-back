@@ -179,8 +179,8 @@ function NotiItemToMe(props){
 
 
 function Notification() {
-  const id_local = '6450a7a8eea98b8f59586b44';
-  // const id_local = '644fc1664a26b861c8170394';
+  // const id_local = '6450a7a8eea98b8f59586b44';
+  const id_local = '644fc1664a26b861c8170394';
   // const name_local = 'Pun';
   const name_local = 'Game poro'
   const role_local = '';

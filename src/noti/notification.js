@@ -179,10 +179,11 @@ function NotiItemToMe(props){
 
 
 function Notification() {
+  const user = JSON.parse(localStorage.getItem("user"));
   // const id_local = '6450a7a8eea98b8f59586b44';
-  const id_local = '644fc1664a26b861c8170394';
+  const id_local = user._id;
   // const name_local = 'Pun';
-  const name_local = 'Game poro'
+  const name_local = user.username;
   const role_local = '';
   const [pullnotiinfo, setPullNotiinfo] = useState(false);
   const [historynoti, setHistiryNoti] = useState([]);

@@ -16,6 +16,7 @@ export default function Topbar() {
             <div className="topbarLinks">
                 <span className="topbarLink" onClick={()=>navigate('/')}>หน้าแรก</span>
                 <span className="topbarLink" onClick={()=>navigate('/listitem')}>หาสิ่งของ</span>
+                <span className="topbarLink" onClick={()=>navigate('/noti')}>การแจ้งเตือน</span>
             </div>
         </div>
         <div className="topbarCenter">

@@ -34,6 +34,11 @@ export default function Profile() {
         })
     }, [random])
 
+    const handleOnLogout = async (e) => {
+        localStorage.clear();
+        window.location.href = "/login";
+    };
+
 
 
     return (
@@ -75,7 +80,7 @@ export default function Profile() {
                 </div>
                 <div className="buttonContainer">
                     <button className="button" onClick={() => setModal(true)}>แก้ไข</button>
-                    <button className="button">ออกจากระบบ</button>
+                    <button className="button" onClick={handleOnLogout}>ออกจากระบบ</button>
                 </div>
                 {modal && <ProfileModal closeModal={setModal} user={user}/>}
             </div>

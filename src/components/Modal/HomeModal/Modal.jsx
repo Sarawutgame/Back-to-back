@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./modal.css"
 
 // import InputLabel from '@mui/material/InputLabel';
@@ -8,9 +8,36 @@ import Select from '@mui/material/Select';
 
 function Modal({ closeModal }) {
   const [typeInItem, settypeInItem] = React.useState('');
+  const [desc, setDesc] = useState('');
+
   const handleInChange = (event) => {
     settypeInItem(event.target.value);
   };
+  const inputDesc = (event) => {
+    setDesc(event.target.value);
+  }
+
+  async function createPost(){
+    const postJson = {
+      userId: "64506e225e0bfe6563a9d81a",
+      type: typeInItem,
+      desc: desc,
+      imgPath: "",
+      like: 0,
+      comments: [],
+    }
+
+    // console.log(JSON.stringify(postJson))
+    await fetch("http://localhost:3005/createPost", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(postJson)
+    })
+    .then((res) => res.json());
+  }
+
 
   return (
     <div className='modalBackground'>
@@ -37,19 +64,19 @@ function Modal({ closeModal }) {
                   onChange={handleInChange}
                   style={{ width: '50%', borderRadius: '20px', height: '40px', borderColor: 'black' }}
                   >
-                  <MenuItem value={10} >เลือกประเภท</MenuItem>
-                  <MenuItem value={30}>พูดคุย</MenuItem>
-                  <MenuItem value={40}>หาของ</MenuItem>
+                  <MenuItem value={""} >เลือกประเภท</MenuItem>
+                  <MenuItem value={"Talking"}>พูดคุย</MenuItem>
+                  <MenuItem value={"Finding"}>หาของ</MenuItem>
               </Select>
             </div>
             <div style={{ marginBottom: '2%' }}>
                 <h3 style={{ margin: '0', marginLeft: '2%' }}>คำอธิบาย</h3>
-                <textarea placeholder="คำอธิบาย" rows={3} style={{ width: '90%', borderRadius: '20px', padding: '2%' }} />
+                <textarea placeholder="คำอธิบาย" rows={3} style={{ width: '90%', borderRadius: '20px', padding: '2%' }} onChange={inputDesc} value={desc} />
             </div>
           </div>
           <div className="modalFooter">
             <button style={{backgroundColor:'#b02121', borderRadius:'30px'}} onClick={() => closeModal(false)}>Cancel</button>
-            <button style={{backgroundColor:'#05AB9F', borderRadius:'30px'}}>Continue</button>
+            <button style={{backgroundColor:'#05AB9F', borderRadius:'30px'}} onClick={createPost}>Continue</button>
           </div>
         </div>
     </div>

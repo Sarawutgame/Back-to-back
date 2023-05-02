@@ -4,7 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faComment, faFlag, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import logo from '../../logo.svg';
 
-export default function Post() {
+export default function Post(props) {
+    // console.log(data);
+    const post = props.data
   return (
     <div className="post">
         <div className="postWrapper">
@@ -13,7 +15,7 @@ export default function Post() {
                     <img className="postProfileImg" src={logo} alt="" />
                     <div className="postInfo">
                         <span className="postUsername">user</span>
-                        <span className="postType">type</span>
+                        <span className="postType">{post.type}</span>
                     </div>
                 </div>
                 <div className="postTopRight">
@@ -21,7 +23,7 @@ export default function Post() {
                 </div>
             </div>
             <div className="postCenter">
-                <span className="postText">hello world</span>
+                <span className="postText">{post.desc}</span>
                 <img src={logo} alt="" className="postImg" />
             </div>
             <div className="postBottom">
@@ -34,7 +36,7 @@ export default function Post() {
                     <span className="icon">report</span> */}
                 </div>
                 <div className="postBottomRight">
-                    <span className="postDate">เวลา 15.49 13/04/2023</span>
+                    <span className="postDate">{post.time}</span>
                 </div>
             </div>
         </div>

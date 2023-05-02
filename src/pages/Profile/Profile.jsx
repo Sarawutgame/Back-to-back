@@ -20,7 +20,7 @@ export default function Profile() {
     // }
 
     useEffect(() => {
-        fetch("http://localhost:3005/userById/644fc1664a26b861c8170394", {
+        fetch("http://localhost:3005/userById/64506e225e0bfe6563a9d81a", {
             method: 'GET',
         })
         .then((res) => res.json())

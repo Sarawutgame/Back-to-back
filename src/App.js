@@ -2,11 +2,11 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';
-// import CoverItem from './listitem/listitem';
+import CoverItem from './listitem/listitem';
 import RegisterForm from './components/Register';  
 import Login from './components/Login';
 import DetaiIitem from './detailitem/detailitem';
-// import Notification from './noti/notification';
+import Notification from './noti/notification';
 
 function App() {
   return <Routes>
@@ -16,7 +16,7 @@ function App() {
     <Route path="/profile" element={<Profile />} />
     {/* <Route path="/listitem" element={<CoverItem />} /> */}
     <Route path="/detailitem" element={<DetaiIitem />} />
-    {/* <Route path="/noti" element={<Notification />} /> */}
+    <Route path="/noti" element={<Notification />} />
     
   </Routes>
 }

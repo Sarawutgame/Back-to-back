@@ -58,6 +58,10 @@ function DetaiIitem() {
   const userid_props = '644fc1664a26b861c8170394';
   const tag = ['อุปกรณ์การเรียน', 'ดอกไม้'];
 
+  //USER
+  const id_local = '6450a7a8eea98b8f59586b44';
+  const name_local = 'Game Poro';
+
 
   useEffect(() => {
     fetch("http://localhost:3005/getitem/" + id_props, {
@@ -108,8 +112,47 @@ function DetaiIitem() {
   const [reportDes, setReportDes] = React.useState('');
 
 
-  function summitInterest(){
-    alert('เพิ่มความสนใจเเล้ว');
+  async function summitInterest(){
+
+    let notiJson = {
+      iduser: id_local,
+      nameitem: detailitemlist.name,
+      iditem: detailitemlist._id,
+      usernamepost: userDetail.username,
+      useridpost: userDetail._id,
+      itemtype: detailitemlist.type,
+      imageURL:detailitemlist.imagePath
+    }
+    await fetch("http://localhost:3005/createNoti", {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(notiJson),
+    })
+    .then((res) => res.json()).then(() => {
+    }).catch((e) => console.log(e));
+
+    let request = {
+      iduser: userDetail._id,
+      iditem:detailitemlist._id,
+      nameitem:detailitemlist.name,
+      usernamerequest:name_local,
+      useridrequest:id_local,
+      itemtype:detailitemlist.type,
+      imageURL:detailitemlist.imagePath
+    }
+    await fetch("http://localhost:3005/createRequest", {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(request),
+      })
+      .then((res) => res.json()).then(() => {
+          alert('บอกสนใจสิ่งของเรียบร้อยเเล้ว');
+      }).catch((e) => console.log(e));
+
   }
 
   function InputReportDes(event){

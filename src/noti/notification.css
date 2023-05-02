@@ -125,6 +125,7 @@ body{
     background-color: #05AB9F;
     border:0px;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .reject-button{
@@ -134,4 +135,5 @@ body{
     border-color: #F9F9F9;
     background-color: #ca342f;
     border:0px;
+    cursor: pointer;
 }

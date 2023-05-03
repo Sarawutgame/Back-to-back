@@ -46,7 +46,7 @@ export default function Profile() {
             <Topbar />
             <div className="profileContainer">
                 <img src={user.imageuserpath} alt="" className="profileImage"/>
-                <span>Name</span>
+                <span>{user.username}</span>
                 <div className="inputContainer">
                     <span className="profileTitle">ชื่อ</span>
                     <input type="text" className="profileInput" value={user.username} readOnly />

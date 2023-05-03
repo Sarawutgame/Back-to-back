@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import './Adminpage.css'; // Import the CSS file
 import { useEffect } from 'react';
+import Topbar from './Topbar/Topbar';
 
 
 
@@ -64,7 +65,8 @@ function AdminPage() {
         setShowModalAdmin(!showModalAdmin);
     };
     return (
-
+        <>
+        <Topbar />
         <div className="container-ad">
 
             <div className="report-header">
@@ -72,8 +74,8 @@ function AdminPage() {
                 <button className='sub-button'>ทั้งหมด</button>
                 <table className="table">
                     <tr className="row">
-                        <th style={{fontSize:'20px'}}>ชื่อของสิ่งที่ถูกเเบน</th>
-                        <th style={{fontSize:'20px'}}>รายระเอียด</th>
+                        <th style={{fontSize:'20px'}}>ชื่อของสิ่งที่รายงาน</th>
+                        <th style={{fontSize:'20px'}}>รายละเอียด</th>
                         <th style={{fontSize:'20px'}}>ประเภท</th>
                         <th style={{fontSize:'20px'}}>การดำเนินการ</th>
                     </tr>
@@ -104,7 +106,15 @@ function AdminPage() {
                                     <td>{report_item.desc}</td>
                                     <td ><p style={{margin:'0px', display:'flex', justifyContent:'center'}}>{report_item.typereport}</p></td>
                                     <td style={{display:'flex', justifyContent:'center'}}>
-                                        <button  className='Ban-ad' onClick={() => summitBan(report_item)}><h5 style={{margin:'0px', color:'white', fontSize:'14px'}}>Ban</h5></button>
+                                        {
+                                            report_item.statusReport === 'done' &&
+                                            <p style={{margin:'0px', display:'flex', justifyContent:'center'}}>เเบนเรียบร้อยเเล้ว</p>
+                                        }
+                                        {
+                                            report_item.statusReport !== 'done' &&
+                                            <button  className='Ban-ad' onClick={() => summitBan(report_item)}><h5 style={{margin:'0px', color:'white', fontSize:'14px'}}>Ban</h5></button>
+                                        }
+                                        
                                         {/* {showModalAdmin && (
                                             <div className='modalAdminBG'>
                                                 <div className='modalAdmin-container'>
@@ -160,7 +170,7 @@ function AdminPage() {
                 </table>
             </div>
         </div>
-
+        </>
     );
 }
 

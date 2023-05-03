@@ -9,6 +9,7 @@ export default function Topbar() {
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("user"));
     const userid = user._id;
+    const role = user.role;
   return (
     <div className='topbarContainer'>
         <div className="topbarLeft">
@@ -17,6 +18,10 @@ export default function Topbar() {
                 <span className="topbarLink" onClick={()=>navigate('/')}>หน้าแรก</span>
                 <span className="topbarLink" onClick={()=>navigate('/listitem')}>หาสิ่งของ</span>
                 <span className="topbarLink" onClick={()=>navigate('/noti')}>การแจ้งเตือน</span>
+                {
+                    role === 'admin' &&
+                    <span className="topbarLink" onClick={()=>navigate('/admin')}>Admin</span>
+                }
             </div>
         </div>
         <div className="topbarCenter">

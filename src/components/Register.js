@@ -79,7 +79,7 @@ function RegisterForm() {
         setFaculty(event.target.value);
     }
 
-    async function handleSubmit(event) {
+    async function handleSubmit() {
         // event.preventDefault();
         // registerUser(username, email, password);
         const userJson = {
@@ -101,8 +101,9 @@ function RegisterForm() {
             },
             body: JSON.stringify(userJson),
         })
-        .then((res) => res.json())
+        .then((res) => res.json()).then(() => alert('สมัครสมาชิกเเล้ว'));
     }
+    
 
     // function handleSubmit(event) {
     //     event.preventDefault();
@@ -130,7 +131,7 @@ function RegisterForm() {
                 </div>
             </form>
             <div className='submitButton'>
-                <button className='button-register' onClick={handleSubmit}>สมัครสมาชิก</button>
+                <button className='button-register' onClick={() => handleSubmit()}>สมัครสมาชิก</button>
             </div>
             {/* <button>ยังไม่มีบัญชีสมัครได้เลย</button> */}
         </div>

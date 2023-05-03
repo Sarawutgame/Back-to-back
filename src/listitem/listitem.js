@@ -93,7 +93,7 @@ function CoverItem() {
     const [name, setName] = useState('');
     const [desc, setDesc] = useState('');
     const [tag, setTag] = useState('');
-    const [price, setPrice] = useState('');
+    const [price, setPrice] = useState(0);
     const [typeItem, settypeItem] = React.useState('All');
 
     const inputName = (event) => {
@@ -122,7 +122,20 @@ function CoverItem() {
         })
         .then((res) => res.json())
         .then((value) => {
-            showitem = value.filter(el => el.status !== 'complete');
+            // showitem = value.filter(el => el.status !== 'complete' || el.status !== 'pending');
+            showitem = value.filter(el => {
+                var check = true;
+                if(el.status === 'complete'){
+                    check = false;
+                }
+                // if(el.status === 'pending'){
+                //     check = false;
+                // }
+                if(el.ban){
+                    check = false
+                }
+                return check;
+            });
             showitem = JSON.stringify(showitem);
             showitem = JSON.parse(showitem);
             setAllItem(showitem)

@@ -107,7 +107,7 @@ function ProfileModal( props) {
                 </div>
             </div>
             <div className="profileModalFooter">
-                <button id='cancel' onClick={() => props.closeModal(false)}>Cancel</button>
+                <button id='cancel' style={{marginRight:'10px'}} onClick={() => props.closeModal(false)}>Cancel</button>
                 <button id='continue' onClick={handleEdit}>Continue</button>
             </div>
         </div>

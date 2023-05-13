@@ -98,7 +98,7 @@ function CoverItem() {
     const [imgPath, setImgPath] = useState();
     const [name, setName] = useState('');
     const [desc, setDesc] = useState('');
-    const [tag, setTag] = useState('');
+    const [tag, setTag] = useState({tagName: "", tagPrice: 0});
     const [price, setPrice] = useState(0);
     const [typeItem, settypeItem] = React.useState('all');
 
@@ -109,7 +109,12 @@ function CoverItem() {
         setDesc(event.target.value);
     }
     const inputTag = (event) => {
-        setTag(event.target.value);
+        const selectedTagName = event.target.value;
+        const selectedTag = allTag.find((tag) => tag.tagname === selectedTagName)
+        setTag({
+            tagName: selectedTagName,
+            tagPrice: selectedTag ? selectedTag.tagprice : 0,
+        })
     }
     const inputPrice = (event) => {
         setPrice(event.target.value);
@@ -189,11 +194,11 @@ function CoverItem() {
 
 
     async function UploadimageToNode(){
-        // var value = tag.tagprice / price;
-        // if(value > 2){
-            // alert('ราคาที่ตั้งไม่เกิน 2 เท่า ของราคาเเนะนำ')
-        // }
-        if(false){}
+        var value = price / tag.tagPrice;
+        if(value > 2){
+            alert('ราคาที่ตั้งไม่เกิน 2 เท่า ของราคาเเนะนำ')
+        }
+        // if(false){}
         else{
             let local_iduser = user._id;
         // console.log(user.id);
@@ -245,7 +250,7 @@ function CoverItem() {
                 name: name,
                 type: typeInItem,
                 desc: desc,
-                tag: tag,
+                tag: tag.tagName,
                 price: price,
                 iduser: local_iduser,
                 nameuser: local_nameuser,
@@ -434,7 +439,7 @@ function CoverItem() {
                                             <Select
                                                 labelId="input-select-small"
                                                 id="input-select-small"
-                                                value={tag}
+                                                value={tag.tagName}
                                                 label="-"
                                                 onChange={inputTag}
                                                 style={{ width: '50%', borderRadius: '20px', height: '40px', borderColor: 'black' }}

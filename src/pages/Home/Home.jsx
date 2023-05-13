@@ -13,20 +13,29 @@ export default function Home() {
     const [commentModal, setCommentModal] = useState(false)
     const [currentPost, setCurrentPost] = useState([])
     const [currentId, setCurrentId] = useState()
+
+    const [postcheck, setPostCheck] = useState(false);
+    const [talkcheck, setTalkCheck] = useState(false);
+
+
     const handlePost = (post) => {
         setCurrentPost(post)
     }
     const handleId = (id) => {
         setCurrentId(id)
     }
+    // useEffect(() => {
+    //     console.log(postcheck);
+    //     console.log('Talk :'+talkcheck)
+    // }, [postcheck, talkcheck]);
     
     return (
         <>
             <Topbar/>
             <div className="homeContainer">
                 <Leftbar openModal={setModal}/>
-                <Feed openCommentModal={setCommentModal} handlePost={handlePost} postId={handleId}/>
-                <Rightbar />
+                <Feed openCommentModal={setCommentModal} handlePost={handlePost} postId={handleId} postcheck={postcheck} talkcheck={talkcheck}/>
+                <Rightbar postcheck={postcheck} setPostCheck={setPostCheck} talkcheck={talkcheck} setTalkCheck={setTalkCheck}/>
                 {modal && <Modal closeModal={setModal} />}
                 {commentModal && <CommentModal closeModal={setCommentModal} post={currentPost} postId={currentId}/>}
             </div>

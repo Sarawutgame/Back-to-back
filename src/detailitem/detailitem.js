@@ -79,7 +79,7 @@ function DetaiIitem() {
 
 
   useEffect(() => {
-    fetch("http://52.201.71.227:3005/getitem/" + id_props, {
+    fetch("http://localhost:3005/getitem/" + id_props, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -93,7 +93,7 @@ function DetaiIitem() {
         
         })
     
-    fetch("http://52.201.71.227:3005/userById/" + userid_props, {
+    fetch("http://localhost:3005/userById/" + userid_props, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -139,7 +139,7 @@ function DetaiIitem() {
       imageURL:detailitemlist.imagePath,
       bitprice: '0',
     }
-    await fetch("http://52.201.71.227:3005/createNoti", {
+    await fetch("http://localhost:3005/createNoti", {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -159,7 +159,7 @@ function DetaiIitem() {
       imageURL:detailitemlist.imagePath,
       bitPrice:'0',
     }
-    await fetch("http://52.201.71.227:3005/createRequest", {
+    await fetch("http://localhost:3005/createRequest", {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -194,7 +194,7 @@ function DetaiIitem() {
         desc: reportDes,
         iditem: detailitemlist._id,
       }
-      await fetch("http://52.201.71.227:3005/createReport", {
+      await fetch("http://localhost:3005/createReport", {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
@@ -230,7 +230,7 @@ function DetaiIitem() {
         useridrequest:id_local
       }
 
-      await fetch("http://52.201.71.227:3005/updateBit", {
+      await fetch("http://localhost:3005/updateBit", {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -240,7 +240,7 @@ function DetaiIitem() {
         console.log('UpdateNoti')
       }).catch((e) => console.log(e));
 
-      await fetch("http://52.201.71.227:3005/createNoti", {
+      await fetch("http://localhost:3005/createNoti", {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'

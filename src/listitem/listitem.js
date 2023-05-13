@@ -37,7 +37,7 @@ function Item(props) {
     // console.log(id, image);
     // console.log(itemtype === 'bit')
     let dateend = '01/01/2023';
-    console.log(iduser);
+    // console.log(iduser);
 
     const handleClick = () => {
         navigate("/detailitem", { state: {_id, iduser}})
@@ -84,8 +84,13 @@ function CoverItem() {
     const [pullitem, setPullItem] = useState(false);
     // let allitem = []
     const [allitem, setAllItem] = useState([]);
+
+    const [showitemlist, setShowItemList] = useState([]);
     var showitem = [];
+    var fillteritem = [];
     // let mapitem = [];
+
+    const [sortitem, setSortitem] = useState('')
 
     const [file, setFile] = useState();
     const [fileimg, setfileimg] = useState();
@@ -94,7 +99,7 @@ function CoverItem() {
     const [desc, setDesc] = useState('');
     const [tag, setTag] = useState('');
     const [price, setPrice] = useState(0);
-    const [typeItem, settypeItem] = React.useState('All');
+    const [typeItem, settypeItem] = React.useState('all');
 
     const inputName = (event) => {
         setName(event.target.value);
@@ -114,7 +119,7 @@ function CoverItem() {
     }
 
     useEffect(() => {
-        fetch("http://52.201.71.227:3005/allitem", {
+        fetch("http://localhost:3005/allitem", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -139,8 +144,9 @@ function CoverItem() {
             showitem = JSON.stringify(showitem);
             showitem = JSON.parse(showitem);
             setAllItem(showitem)
+            setShowItemList(showitem)
             // allitem=value;
-            console.log(allitem);
+            // console.log(allitem);
             setPullItem(true)
             })
         
@@ -152,6 +158,22 @@ function CoverItem() {
         //Runs only on the first render
       }, [pullitem]);
 
+      useEffect(() => {
+        console.log(typeItem)
+        fillteritem = allitem.filter(el =>{
+            var check2 = false;
+            if(typeItem === el.type){
+                check2 = true
+            }else if(typeItem === 'all'){
+                check2 = true;
+            }
+            return check2;
+        })
+        fillteritem = JSON.stringify(fillteritem);
+        fillteritem = JSON.parse(fillteritem);
+        setShowItemList(fillteritem);
+        console.log(fillteritem)
+      }, [typeItem]);
 
 
     async function UploadimageToNode(){
@@ -186,7 +208,7 @@ function CoverItem() {
             fromData.append('avatar', fileimg);
             console.log(file)
 
-            await fetch("http://52.201.71.227:3005/upload", {
+            await fetch("http://localhost:3005/upload", {
                 method: 'POST',
                 body: fromData,
             })
@@ -220,7 +242,7 @@ function CoverItem() {
             console.log(itemJson)
             let itemreturntype = ''
             let request = {}
-            await fetch("http://52.201.71.227:3005/createItem", {
+            await fetch("http://localhost:3005/createItem", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -247,7 +269,7 @@ function CoverItem() {
             })
             console.log(itemreturntype);
             if(itemreturntype == 'auction'){
-                await fetch("http://52.201.71.227:3005/createRequest", {
+                await fetch("http://localhost:3005/createRequest", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -275,6 +297,7 @@ function CoverItem() {
 
     const handleChange = (event) => {
         settypeItem(event.target.value);
+        // console.log(typeItem);
     };
 
     const [open, setOpen] = React.useState(false);
@@ -288,13 +311,13 @@ function CoverItem() {
         // console.log(typeInItem)
     };
 
-    const mockItem = [{ id: '1', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },
-    { id: '2', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-500', image: 'Eiei', itemtype: 'bit', dateend: '28/04/2023', price: '30' },
-    { id: '3', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'give', dateend: '-', price: '30' },
-    { id: '4', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },
-    { id: '5', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },
-    { id: '6', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },]
-    console.log(allitem);
+    // const mockItem = [{ id: '1', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },
+    // { id: '2', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-500', image: 'Eiei', itemtype: 'bit', dateend: '28/04/2023', price: '30' },
+    // { id: '3', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'give', dateend: '-', price: '30' },
+    // { id: '4', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },
+    // { id: '5', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },
+    // { id: '6', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },]
+    // console.log(allitem);
     return (
         <>
         <Topbar />
@@ -309,19 +332,16 @@ function CoverItem() {
                         value={typeItem}
                         label="ทั้งหมด"
                         onChange={handleChange}>
-                        <MenuItem value="">
-                            <em>เลือก Type</em>
-                        </MenuItem>
-                        <MenuItem value="All">ทั้งหมด</MenuItem>
+                        <MenuItem value="all">ทั้งหมด</MenuItem>
                         <MenuItem value='give'>ให้</MenuItem>
                         <MenuItem value='sell'>ขาย</MenuItem>
-                        <MenuItem value='bit'>ประมูล</MenuItem>
+                        <MenuItem value='auction'>ประมูล</MenuItem>
                     </Select>
                 </FormControl>
             </div>
             <hr className='line' />
             <div className='contraniner-item'>
-                {allitem.map((el_item) => {
+                {showitemlist.map((el_item) => {
                     return <Item {...el_item} key={el_item._id} />
                 })}
 

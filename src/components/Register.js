@@ -94,7 +94,7 @@ function RegisterForm() {
             twit: "",
             line: ""
         }
-        await fetch("http://52.201.71.227:3005/register", {
+        await fetch("http://localhost:3005/register", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

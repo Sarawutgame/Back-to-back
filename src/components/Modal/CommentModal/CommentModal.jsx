@@ -24,7 +24,7 @@ function CommentModal( props ) {
         }
 
 
-        await fetch("http://52.201.71.227:3005/comment", {
+        await fetch("http://localhost:3005/comment", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

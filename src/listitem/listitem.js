@@ -189,7 +189,13 @@ function CoverItem() {
 
 
     async function UploadimageToNode(){
-        let local_iduser = user._id;
+        // var value = tag.tagprice / price;
+        // if(value > 2){
+            // alert('ราคาที่ตั้งไม่เกิน 2 เท่า ของราคาเเนะนำ')
+        // }
+        if(false){}
+        else{
+            let local_iduser = user._id;
         // console.log(user.id);
         let local_nameuser = user.username;
         let notfillfull = false;
@@ -296,6 +302,8 @@ function CoverItem() {
         }
 
 
+        }
+        
 
 
         
@@ -416,10 +424,7 @@ function CoverItem() {
                                                 <MenuItem value={"auction"}>ประมูล</MenuItem>
                                             </Select>
                                         </div>
-                                        <div style={{ marginBottom: '2%' }}>
-                                            <h3 style={{ margin: '0', marginLeft: '2%' }}>ราคา</h3>
-                                            <input type='number' placeholder="Price" style={{ width: '50%', height: '40px', borderRadius: '20px', padding: '2%' }} onChange={(inputPrice)} value={price}/>
-                                        </div>
+                                        
                                         <div style={{ marginBottom: '2%' }}>
                                             <h3 style={{ margin: '0', marginLeft: '2%' }}>คำอธิบาย</h3>
                                             <textarea placeholder="คำอธิบาย" rows={3} style={{ width: '90%', borderRadius: '20px', padding: '2%' }} onChange={(inputDesc)} value={desc}/>
@@ -440,6 +445,10 @@ function CoverItem() {
                                                 })}
                                             </Select>
                                             {/* <input type='text' placeholder="Tag" style={{ width: '50%', height: '40px', borderRadius: '20px', padding: '2%' }} onChange={(inputTag)} value={tag}/> */}
+                                        </div>
+                                        <div style={{ marginBottom: '2%' }}>
+                                            <h3 style={{ margin: '0', marginLeft: '2%' }}>ราคา</h3>
+                                            <input type='number' placeholder="Price" style={{ width: '50%', height: '40px', borderRadius: '20px', padding: '2%' }} onChange={(inputPrice)} value={price}/>
                                         </div>
                                     </div>
                                 </form>

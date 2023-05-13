@@ -168,16 +168,20 @@ function AdminPage() {
                 </div>
                 <table className='table'>
                     <tr className='row'>
-                        <th style={{fontSize:'20px'}}>ชื่อ</th>
-                        <th style={{fontSize:'20px'}}>ราคา</th>
-                        <th style={{fontSize:'20px'}}>แก้ไข</th>
+                        <th style={{fontSize:'20px'}}>ชื่อ TAG</th>
+                        <th style={{fontSize:'20px'}}>ราคาแนะนำ</th>
+                        <th style={{fontSize:'20px'}}>แก้ไข / ลบ TAG</th>
                     </tr>
                     {allTag.map((value, index) => {
                         return(
-                            <tr>
-                                <td>{value.tagname}</td>
-                                <td>{value.tagprice}</td>
-                                <td style={{display:'flex', justifyContent:'center'}}>
+                            <tr style={{width:'100%'}}>
+                                <td style={{width:'80%', fontWeight:'bold',}}>#{value.tagname}</td>
+                                <td style={{width:'20%', alignItems:'center'}}>
+                                    <div style={{display:'flex', justifyContent:'center'}}>
+                                        {value.tagprice}
+                                    </div>
+                                    </td>
+                                <td style={{display:'flex', justifyContent:"end"}}>
                                     <button className='edit-btn' onClick={() => handleEditModal(value._id, value.tagprice)}><h5 style={{margin: '0px', color: 'white', fontSize: '14px'}}>Edit</h5></button>
                                     <button className='delete-btn' onClick={() => handleDeleteTag(value._id)}><h5 style={{margin: '0px', color: 'white', fontSize: '14px'}}>Delete</h5></button>
                                 </td>

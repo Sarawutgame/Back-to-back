@@ -31,7 +31,7 @@ function Login() {
           alert("Please fill all input");
         } else {
           e.preventDefault();
-          let result = await fetch("http://52.201.71.227:3005/login", {
+          let result = await fetch("http://localhost:3005/login", {
             method: "post",
             body: JSON.stringify(user),
             headers: {

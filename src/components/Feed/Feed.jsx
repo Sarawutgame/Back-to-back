@@ -7,7 +7,7 @@ export default function Feed(props){
     const [random, setRandom] = useState(false);
 
     useEffect(() => {
-        fetch("http://52.201.71.227:3005/allPost", {
+        fetch("http://localhost:3005/allPost", {
             method: 'GET',
         })
         .then((res) => res.json())

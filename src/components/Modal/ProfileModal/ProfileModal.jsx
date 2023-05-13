@@ -51,7 +51,7 @@ function ProfileModal( props) {
             line: line
         }
 
-        await fetch('http://52.201.71.227:3005/updateUser/' + user._id, {
+        await fetch('http://localhost:3005/updateUser/' + user._id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

@@ -23,7 +23,7 @@ export default function Profile() {
     // }
 
     useEffect(() => {
-        fetch("http://52.201.71.227:3005/userById/" + id, {
+        fetch("http://localhost:3005/userById/" + id, {
             method: 'GET',
         })
         .then((res) => res.json())

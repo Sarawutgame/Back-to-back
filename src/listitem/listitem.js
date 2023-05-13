@@ -84,9 +84,14 @@ function CoverItem() {
     const [pullitem, setPullItem] = useState(false);
     // let allitem = []
     const [allitem, setAllItem] = useState([]);
+
+    const [showitemlist, setShowItemList] = useState([]);
     const [allTag, setAllTag] = useState([]);
     var showitem = [];
+    var fillteritem = [];
     // let mapitem = [];
+
+    const [sortitem, setSortitem] = useState('')
 
     const [file, setFile] = useState();
     const [fileimg, setfileimg] = useState();
@@ -95,7 +100,7 @@ function CoverItem() {
     const [desc, setDesc] = useState('');
     const [tag, setTag] = useState('');
     const [price, setPrice] = useState(0);
-    const [typeItem, settypeItem] = React.useState('All');
+    const [typeItem, settypeItem] = React.useState('all');
 
     const inputName = (event) => {
         setName(event.target.value);
@@ -140,8 +145,9 @@ function CoverItem() {
             showitem = JSON.stringify(showitem);
             showitem = JSON.parse(showitem);
             setAllItem(showitem)
+            setShowItemList(showitem)
             // allitem=value;
-            // console.log(allitem);
+            // // console.log(allitem);
             setPullItem(true)
             })
 
@@ -164,6 +170,22 @@ function CoverItem() {
         //Runs only on the first render
       }, [pullitem]);
 
+      useEffect(() => {
+        console.log(typeItem)
+        fillteritem = allitem.filter(el =>{
+            var check2 = false;
+            if(typeItem === el.type){
+                check2 = true
+            }else if(typeItem === 'all'){
+                check2 = true;
+            }
+            return check2;
+        })
+        fillteritem = JSON.stringify(fillteritem);
+        fillteritem = JSON.parse(fillteritem);
+        setShowItemList(fillteritem);
+        console.log(fillteritem)
+      }, [typeItem]);
 
 
     async function UploadimageToNode(){
@@ -287,6 +309,7 @@ function CoverItem() {
 
     const handleChange = (event) => {
         settypeItem(event.target.value);
+        // console.log(typeItem);
     };
 
     const [open, setOpen] = React.useState(false);
@@ -300,12 +323,12 @@ function CoverItem() {
         // console.log(typeInItem)
     };
 
-    const mockItem = [{ id: '1', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },
-    { id: '2', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-500', image: 'Eiei', itemtype: 'bit', dateend: '28/04/2023', price: '30' },
-    { id: '3', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'give', dateend: '-', price: '30' },
-    { id: '4', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },
-    { id: '5', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },
-    { id: '6', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },]
+    // const mockItem = [{ id: '1', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },
+    // { id: '2', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-500', image: 'Eiei', itemtype: 'bit', dateend: '28/04/2023', price: '30' },
+    // { id: '3', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'give', dateend: '-', price: '30' },
+    // { id: '4', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },
+    // { id: '5', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },
+    // { id: '6', itemname: 'ยางลบดินสอ ก้อนเล็ก ซากุระ Foam XRFW-100', image: 'Eiei', itemtype: 'sell', dateend: '-', price: '30' },]
     // console.log(allitem);
     return (
         <>
@@ -321,19 +344,16 @@ function CoverItem() {
                         value={typeItem}
                         label="ทั้งหมด"
                         onChange={handleChange}>
-                        <MenuItem value="">
-                            <em>เลือก Type</em>
-                        </MenuItem>
-                        <MenuItem value="All">ทั้งหมด</MenuItem>
+                        <MenuItem value="all">ทั้งหมด</MenuItem>
                         <MenuItem value='give'>ให้</MenuItem>
                         <MenuItem value='sell'>ขาย</MenuItem>
-                        <MenuItem value='bit'>ประมูล</MenuItem>
+                        <MenuItem value='auction'>ประมูล</MenuItem>
                     </Select>
                 </FormControl>
             </div>
             <hr className='line' />
             <div className='contraniner-item'>
-                {allitem.map((el_item) => {
+                {showitemlist.map((el_item) => {
                     return <Item {...el_item} key={el_item._id} />
                 })}
 

@@ -30,7 +30,7 @@ function Modal({ closeModal }) {
     fromData.append('avatar', fileimg);
     console.log(file)
 
-    await fetch("http://52.201.71.227:3005/upload", {
+    await fetch("http://localhost:3005/upload", {
         method: 'POST',
         body: fromData,
     })
@@ -56,7 +56,7 @@ function Modal({ closeModal }) {
       // comments: [],
     }
     // console.log(JSON.stringify(postJson))
-    await fetch("http://52.201.71.227:3005/createPost", {
+    await fetch("http://localhost:3005/createPost", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

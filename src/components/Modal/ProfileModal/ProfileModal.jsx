@@ -11,6 +11,12 @@ function ProfileModal( props) {
     const [fb, setFb] = useState(user.fb);
     const [twit, setTwit] = useState(user.twit);
     const [line, setLine] = useState(user.line);
+    const [fileimg, setfileimg] = useState();
+    const [file, setFile] = useState();
+    const [role, setRole] = useState(user.role);
+    const [ban, setBan] = useState(user.ban);
+
+    const [imgPath, setImgPath] = useState();
 
     const inputUsername = (event) => {
         setUsername(event.target.value);
@@ -40,6 +46,23 @@ function ProfileModal( props) {
     }
 
     const handleEdit = async () => {
+        let imageURLS3 = '';
+        const fromData = new FormData();
+        fromData.append('avatar', fileimg);
+        console.log(file)
+
+        await fetch("http://localhost:3005/upload", {
+            method: 'POST',
+            body: fromData,
+        })
+        .then((res) => res.json())
+        .then((value) => {
+            console.log(value.fileurl);
+            setImgPath(value.fileurl);
+            imageURLS3=value.fileurl;
+        })
+        .catch(err => console.log(err));
+
         const updatedUser = {
             username: username,
             email: email,
@@ -48,7 +71,10 @@ function ProfileModal( props) {
             ig: ig,
             fb: fb,
             twit: twit,
-            line: line
+            line: line,
+            imageuserpath: imageURLS3,
+            role: role,
+            ban: ban
         }
 
         await fetch('http://localhost:3005/updateUser/' + user._id, {
@@ -60,9 +86,23 @@ function ProfileModal( props) {
         })
         .then((res) => {
             res.json()
+        })
+        
+        await fetch('http://localhost:3005/userById/' + user._id, {
+            method: 'GET',
+        })
+        .then((res) => res.json())
+        .then((value) => {
+            localStorage.setItem("user", JSON.stringify(value));
             props.closeModal(false)
             props.setBool(false)
         })
+    }
+
+    function handleImg(e) {
+        console.log(e.target.files);
+        setfileimg(e.target.files[0]);
+        setFile(URL.createObjectURL(e.target.files[0]));
     }
 
   return (
@@ -73,6 +113,14 @@ function ProfileModal( props) {
             </div>
             <hr  className='profileLine2'/>
             <div className="profileModalBody">
+                <div style={{ marginBottom: '2%' }}>
+                    <h3 style={{ margin: '0', marginLeft: '2%' }}>รูปภาพ</h3>
+                    <input type="file" onChange={handleImg} placeholder="รูปภาพ" style={{ width: '90%', height: '50px', borderRadius: '20px', padding: '2%' }} className='up-input-css' />
+                    <div className='container-up-image'>
+                      <img src={file} className='up-image'></img>
+                    </div>
+                    
+                </div>
                 <div style={{ marginBottom: '2%' }}>
                     <p style={{ margin: '0', marginLeft: '2%' }}>ชื่อ</p>
                     <input type="text" placeholder="Name" style={{ width: '90%', height: '40px', borderRadius: '20px', padding: '2%' }} onChange={inputUsername} value={username} />

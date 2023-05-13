@@ -434,21 +434,24 @@ function CoverItem() {
                                             <h3 style={{ margin: '0', marginLeft: '2%' }}>คำอธิบาย</h3>
                                             <textarea placeholder="คำอธิบาย" rows={3} style={{ width: '90%', borderRadius: '20px', padding: '2%' }} onChange={(inputDesc)} value={desc}/>
                                         </div>
-                                        <div style={{ marginBottom: '2%' }}>
+                                        <div style={{ marginBottom: '2%'}}>
                                             <h3 style={{ margin: '0', marginLeft: '2%' }}>TAG</h3>
-                                            <Select
-                                                labelId="input-select-small"
-                                                id="input-select-small"
-                                                value={tag.tagName}
-                                                label="-"
-                                                onChange={inputTag}
-                                                style={{ width: '50%', borderRadius: '20px', height: '40px', borderColor: 'black' }}
-                                                >
-                                                <MenuItem value={""}><em>โปรดเลือกแท็ก</em></MenuItem>
-                                                {allTag.map((value, index) => {
-                                                    return <MenuItem key={index} value={value.tagname}>{value.tagname}</MenuItem>
-                                                })}
-                                            </Select>
+                                            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                                                <Select
+                                                    labelId="input-select-small"
+                                                    id="input-select-small"
+                                                    value={tag.tagName}
+                                                    label="-"
+                                                    onChange={inputTag}
+                                                    style={{ width: '50%', borderRadius: '20px', height: '40px', borderColor: 'black' }}
+                                                    >
+                                                    <MenuItem value={""}><em>โปรดเลือกแท็ก</em></MenuItem>
+                                                    {allTag.map((value, index) => {
+                                                        return <MenuItem key={index} value={value.tagname}>{value.tagname}</MenuItem>
+                                                    })}
+                                                </Select>
+                                                <h4 style={{margin: '0px', marginLeft: '20px', alignSelf: 'center', fontSize: '18px'}}>ราคาแนะนำ {tag.tagPrice}฿</h4>
+                                            </div>
                                             {/* <input type='text' placeholder="Tag" style={{ width: '50%', height: '40px', borderRadius: '20px', padding: '2%' }} onChange={(inputTag)} value={tag}/> */}
                                         </div>
                                         <div style={{ marginBottom: '2%' }}>

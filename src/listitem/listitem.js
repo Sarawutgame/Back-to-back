@@ -86,6 +86,7 @@ function CoverItem() {
     const [allitem, setAllItem] = useState([]);
 
     const [showitemlist, setShowItemList] = useState([]);
+    const [allTag, setAllTag] = useState([]);
     var showitem = [];
     var fillteritem = [];
     // let mapitem = [];
@@ -146,15 +147,26 @@ function CoverItem() {
             setAllItem(showitem)
             setShowItemList(showitem)
             // allitem=value;
-            // console.log(allitem);
+            // // console.log(allitem);
             setPullItem(true)
             })
+
+        fetch("http://localhost:3005/getTag", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then((res) => res.json())
+        .then((value) => {
+            setAllTag(value);
+        })
         
         // showitem = allitem.filter(el => el.status !== 'complete').map(el => {
         //     // return {_id, type, tag, price, name, imagePath, desc, daytime, __v, iduser};
         // });
 
-        console.log(showitem)
+        // console.log(showitem)
         //Runs only on the first render
       }, [pullitem]);
 
@@ -178,7 +190,7 @@ function CoverItem() {
 
     async function UploadimageToNode(){
         let local_iduser = user._id;
-        console.log(user.id);
+        // console.log(user.id);
         let local_nameuser = user.username;
         let notfillfull = false;
 
@@ -206,7 +218,7 @@ function CoverItem() {
             let imageURLS3 = '';
             const fromData = new FormData();
             fromData.append('avatar', fileimg);
-            console.log(file)
+            // console.log(file)
 
             await fetch("http://localhost:3005/upload", {
                 method: 'POST',
@@ -214,7 +226,7 @@ function CoverItem() {
             })
             .then((res) => res.json())
             .then((value) => {
-                console.log(value.fileurl);
+                // console.log(value.fileurl);
                 setImgPath(value.fileurl);
                 imageURLS3=value.fileurl;
                 setPullItem(false);
@@ -239,7 +251,7 @@ function CoverItem() {
 
             // const newJSON = JSON.stringify(itemJson)
             // itemForm.append("Json", itemJson)
-            console.log(itemJson)
+            // console.log(itemJson)
             let itemreturntype = ''
             let request = {}
             await fetch("http://localhost:3005/createItem", {
@@ -250,7 +262,7 @@ function CoverItem() {
                 body: JSON.stringify(itemJson),
             })
             .then((res) => res.json()).then((value) => {
-                console.log(value._id)
+                // console.log(value._id)
                 itemreturntype = value.type;
                 if(value.type == 'auction'){
                         request = {
@@ -267,7 +279,7 @@ function CoverItem() {
                 }
                 
             })
-            console.log(itemreturntype);
+            // console.log(itemreturntype);
             if(itemreturntype == 'auction'){
                 await fetch("http://localhost:3005/createRequest", {
                     method: 'POST',
@@ -290,7 +302,7 @@ function CoverItem() {
     }
 
     function handleImg(e) {
-        console.log(e.target.files);
+        // console.log(e.target.files);
         setfileimg(e.target.files[0]);
         setFile(URL.createObjectURL(e.target.files[0]));
     }
@@ -414,7 +426,20 @@ function CoverItem() {
                                         </div>
                                         <div style={{ marginBottom: '2%' }}>
                                             <h3 style={{ margin: '0', marginLeft: '2%' }}>TAG</h3>
-                                            <input type='text' placeholder="Tag" style={{ width: '50%', height: '40px', borderRadius: '20px', padding: '2%' }} onChange={(inputTag)} value={tag}/>
+                                            <Select
+                                                labelId="input-select-small"
+                                                id="input-select-small"
+                                                value={tag}
+                                                label="-"
+                                                onChange={inputTag}
+                                                style={{ width: '50%', borderRadius: '20px', height: '40px', borderColor: 'black' }}
+                                                >
+                                                <MenuItem value={""}><em>โปรดเลือกแท็ก</em></MenuItem>
+                                                {allTag.map((value, index) => {
+                                                    return <MenuItem key={index} value={value.tagname}>{value.tagname}</MenuItem>
+                                                })}
+                                            </Select>
+                                            {/* <input type='text' placeholder="Tag" style={{ width: '50%', height: '40px', borderRadius: '20px', padding: '2%' }} onChange={(inputTag)} value={tag}/> */}
                                         </div>
                                     </div>
                                 </form>

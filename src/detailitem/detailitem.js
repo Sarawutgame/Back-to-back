@@ -282,12 +282,9 @@ function DetaiIitem() {
 
           <div className='name-contrainer'>
             <h2 className='name-item'>{detailitemlist.name}</h2>
-            {/* <div className='group-tag'>
-                {tag.map((tag_item) =>{
-                    return <h4 className='tag-item' key={tag_item}>#{tag_item}</h4>
-                })}
-                
-            </div> */}
+            <div className='group-tag'>
+                  <h4 className='tag-item'>#{detailitemlist.tag}</h4>
+            </div>
           </div>
 
           <div className='detail-contrainer'>

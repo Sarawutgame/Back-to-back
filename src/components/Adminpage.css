@@ -8,15 +8,19 @@
 .container-ad{
   background-color: rgb(235, 235, 235);
   width: 1598px;
-  min-height: 942px;
+  min-height: 1200px;
   display: flex;
   /* justify-content: center; */
   /* align-items: center; */
   border-radius: 50px;
   margin: auto;
   margin-top: 15px;
+  flex-direction: column;
 }
 
+.add-tag {
+  padding: 0 70px;
+}
 
 .report-header {
   width: 1598px;
@@ -60,12 +64,42 @@ td {
   border-bottom: 1px solid #DFE0EB;
 }
 
+.add-btn {
+  margin-top: 30px;
+  border-radius: 30px;
+  width: 100px;
+  height: 50px;
+  border: none;
+  background-color: #05ab5e;
+  cursor: pointer;
+}
+
+.edit-btn {
+  border-radius: 30px;
+  width: 100px;
+  height: 50px;
+  border: none;
+  background-color: #05AB9F;
+  cursor: pointer;
+}
+
+.delete-btn {
+  margin-left: 15px;
+  border-radius: 30px;
+  width: 100px;
+  height: 50px;
+  border: none;
+  background-color: rgb(233, 79, 79);
+  cursor: pointer;
+}
+
 .Ban-ad {
   border-radius: 30px;
   width: 100px;
   height: 50px;
   border: none;
   background-color: rgb(233, 79, 79);
+  cursor: pointer;
 }
 .normal-ad {
   border-radius: 15px;

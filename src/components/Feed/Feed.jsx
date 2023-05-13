@@ -9,7 +9,7 @@ export default function Feed(props){
     var fillterResult = [];
 
     useEffect(() => {
-        fetch("http://localhost:3005/allPost", {
+        fetch("http://52.201.71.227:3005/allPost", {
             method: 'GET',
         })
         .then((res) => res.json())

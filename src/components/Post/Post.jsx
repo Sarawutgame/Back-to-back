@@ -12,7 +12,7 @@ export default function Post(props) {
     const post = props.data
 
     useEffect(() => {
-        fetch("http://localhost:3005/getPostComment/" + post._id, {
+        fetch("http://52.201.71.227:3005/getPostComment/" + post._id, {
             method: 'GET',
         })
         .then((res) => res.json())
@@ -33,7 +33,7 @@ export default function Post(props) {
         const likeJson = {
             like: post.like + 1,
         }
-        await fetch("http://localhost:3005/posts/" + post._id, {
+        await fetch("http://52.201.71.227:3005/posts/" + post._id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

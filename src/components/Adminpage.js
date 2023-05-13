@@ -20,7 +20,7 @@ function AdminPage() {
     const [pullReport, setPullReport] = useState(false);
 
     useEffect(() => {
-        fetch("http://localhost:3005/getReport", {
+        fetch("http://52.201.71.227:3005/getReport", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ function AdminPage() {
             setPullReport(true)
         })
 
-        fetch("http://localhost:3005/getTag", {
+        fetch("http://52.201.71.227:3005/getTag", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ function AdminPage() {
             iditem: item.iditem,
           }
       
-        await fetch("http://localhost:3005/Banitem", {
+        await fetch("http://52.201.71.227:3005/Banitem", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ function AdminPage() {
             tagname: name,
             tagprice: price,
         }
-        await fetch("http://localhost:3005/createTag", {
+        await fetch("http://52.201.71.227:3005/createTag", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ function AdminPage() {
             price: edittedPrice
         }
 
-        await fetch("http://localhost:3005/updateTag", {
+        await fetch("http://52.201.71.227:3005/updateTag", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -117,7 +117,7 @@ function AdminPage() {
         let selectedTag = {
             id: id
         }
-        await fetch("http://localhost:3005/deleteTag", {
+        await fetch("http://52.201.71.227:3005/deleteTag", {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

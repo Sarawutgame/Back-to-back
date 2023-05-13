@@ -51,7 +51,7 @@ function ProfileModal( props) {
         fromData.append('avatar', fileimg);
         console.log(file)
 
-        await fetch("http://localhost:3005/upload", {
+        await fetch("http://52.201.71.227:3005/upload", {
             method: 'POST',
             body: fromData,
         })
@@ -77,7 +77,7 @@ function ProfileModal( props) {
             ban: ban
         }
 
-        await fetch('http://localhost:3005/updateUser/' + user._id, {
+        await fetch('http://52.201.71.227:3005/updateUser/' + user._id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ function ProfileModal( props) {
             res.json()
         })
         
-        await fetch('http://localhost:3005/userById/' + user._id, {
+        await fetch('http://52.201.71.227:3005/userById/' + user._id, {
             method: 'GET',
         })
         .then((res) => res.json())

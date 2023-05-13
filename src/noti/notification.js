@@ -69,7 +69,7 @@ function NotiItemToMe(props){
       status:'accept'
     }
 
-    await fetch("http://localhost:3005/updateReceive", {
+    await fetch("http://52.201.71.227:3005/updateReceive", {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -92,7 +92,7 @@ function NotiItemToMe(props){
       status:'reject'
     }
     
-    await fetch("http://localhost:3005/updateReceiveReject", {
+    await fetch("http://52.201.71.227:3005/updateReceiveReject", {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -111,7 +111,7 @@ function NotiItemToMe(props){
       notiid: _id,
       iditem: iditem
     }
-    await fetch("http://localhost:3005/stopBit", {
+    await fetch("http://52.201.71.227:3005/stopBit", {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -191,7 +191,7 @@ function Notification() {
   const [receive, setReceiveNoti] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3005/getnotiHistory/" + id_local, {
+    fetch("http://52.201.71.227:3005/getnotiHistory/" + id_local, {
       method: 'GET',
       headers: {
           'Content-Type': 'application/json'
@@ -205,7 +205,7 @@ function Notification() {
     })
 
 
-    fetch("http://localhost:3005/getnotiResive/" + id_local, {
+    fetch("http://52.201.71.227:3005/getnotiResive/" + id_local, {
       method: 'GET',
       headers: {
           'Content-Type': 'application/json'

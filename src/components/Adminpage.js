@@ -15,6 +15,7 @@ import Topbar from './Topbar/Topbar';
 // }
 
 function AdminPage() {
+    const [allTag, setAllTag] = useState([]);
     const [infoReport, setInfoReport] = useState([]);
     const [pullReport, setPullReport] = useState(false);
 
@@ -31,6 +32,17 @@ function AdminPage() {
             // allitem=value;
             console.log(infoReport);
             setPullReport(true)
+        })
+
+        fetch("http://localhost:3005/getTag", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then((res) => res.json())
+        .then((value) => {
+            setAllTag(value);
         })
     
     }, [pullReport]);
@@ -68,7 +80,33 @@ function AdminPage() {
         <>
         <Topbar />
         <div className="container-ad">
-
+            <div className='add-tag'>
+                <div style={{display: "flex", justifyContent: 'space-between'}}>
+                    <p className='header-text'>Add tag</p>
+                    <button className='add-btn'><h5 style={{margin: '0px', color: 'white', fontSize: '14px'}}>Add</h5></button>
+                </div>
+                <table className='table'>
+                    <tr className='row'>
+                        <th style={{fontSize:'20px'}}>ชื่อ</th>
+                        <th style={{fontSize:'20px'}}>ราคา</th>
+                        <th style={{fontSize:'20px'}}>แก้ไข</th>
+                    </tr>
+                    {allTag.map((value, index) => {
+                        return(
+                            <tr>
+                                <td>{value.tagname}</td>
+                                <td>{value.tagprice}</td>
+                                <td style={{display:'flex', justifyContent:'center'}}>
+                                    <button className='edit-btn'><h5 style={{margin: '0px', color: 'white', fontSize: '14px'}}>Edit</h5></button>
+                                    <button className='delete-btn'><h5 style={{margin: '0px', color: 'white', fontSize: '14px'}}>Delete</h5></button>
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </table>
+            </div>
+            <br/>
+            <br/>
             <div className="report-header">
                 <p className="header-text">Report DashBoard</p>
                 <button className='sub-button'>ทั้งหมด</button>
@@ -169,6 +207,7 @@ function AdminPage() {
 
                 </table>
             </div>
+            
         </div>
         </>
     );

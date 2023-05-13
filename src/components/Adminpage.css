@@ -150,4 +150,68 @@ td {
   border-radius: 10px;
 }
 
+.tagModalBackground {
+  width: 100vw;
+  height: 100vh;
+  /* background-color: transparent; */
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tagModalContainer{
+  margin-bottom: 300px;
+  margin-right: 280px;
+  width: 500px;
+  height: 350px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.tagModalTitle{
+  display: inline-block;
+  text-align: center;
+}
+
+.tagModalBody {
+  flex: 20%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  font-size: 1.7rem;
+  overflow-y: scroll;
+  /* text-align: center; */
+}
+
+.tagInput{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.tagModalFooter {
+  flex: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tagModalFooter button {
+  width: 100px;
+  height: 30px;
+  margin: 3px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 
